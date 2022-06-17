@@ -1,11 +1,11 @@
-class Brand {
+class CarBrand {
 
   String? name;
-  int? code;
+  String? code;
 
-  Brand();
-  factory Brand.fromJson(Map<String, dynamic> data) {
-    final Brand brand = Brand();
+  CarBrand();
+  factory CarBrand.fromJson(Map<String, dynamic> data) {
+    final CarBrand brand = CarBrand();
 
     brand.name = data ['nome'];
     brand.code = data['codigo'];

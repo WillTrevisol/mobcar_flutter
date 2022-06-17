@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomListTile extends StatelessWidget {
 
-  CustomListTile({this.iconData, this.onSelected, this.titleText, this.year, this.choices, this.choice, this.itemBuilder});
+  const CustomListTile({Key? key, this.iconData, this.onSelected, this.titleText, this.year, this.choices, this.choice, this.itemBuilder}) : super(key: key);
 
   final IconData? iconData;
   final Function(String choice)? onSelected;

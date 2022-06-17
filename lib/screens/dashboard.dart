@@ -1,17 +1,11 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mobcar/communication.dart/requests.dart';
 import 'package:mobcar/stores/carlist_store.dart';
 import 'package:mobcar/theme.dart';
 import 'package:mobcar/widgets/custom_icon_button.dart';
 import 'package:mobcar/widgets/custom_list_tile.dart';
 import 'package:mobcar/widgets/custom_text_field.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-
-import '../models/brand.dart';
-import '../models/model.dart';
+import 'package:mobcar/widgets/new_car_form.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -28,6 +22,11 @@ class _DashboardState extends State<Dashboard> {
     'Editar',
     'Deletar',
   ];
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +46,8 @@ class _DashboardState extends State<Dashboard> {
         child: Padding(
           padding: const EdgeInsets.only(top: 8),
           child: Text(
-            '© 2020. All rights reserved to Mobcar.', 
-            style: TextStyle(
-              color: MobCarColors.blueMob,
-              fontSize: 16
-            ),
+            '© 2020. All rights reserved to Mobcar.',
+            style: TextStyle(color: MobCarColors.blueMob, fontSize: 16),
             textAlign: TextAlign.center,
           ),
         ),
@@ -67,39 +63,36 @@ class _DashboardState extends State<Dashboard> {
           padding: EdgeInsets.only(top: 12.0, left: 18.0),
           child: Text(
             'Digite um título para adicionar um item: ',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w700
-            ),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
           ),
         ),
-        Observer(
-          builder: (_) {
-            return Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: CustomTextField(
-                hintText: 'Digite um título',
-                prefix: const Icon(
-                  Icons.car_crash_outlined,
-                ),
-                suffix: CustomIconButton(
-                  onTap: carListStore.isButtonActive 
-                  ? () {
-                    openNewItemDialog(context);
-                  } 
-                  : null, 
-                  icon: Icon(
-                    Icons.send_and_archive_rounded, 
-                    color: carListStore.isButtonActive ? MobCarColors.blueMob : Colors.grey,
-                  ),
-                  radius: 32,
-                ),
-                onChanged: carListStore.setNewItemTitle,
-                onSubmitted: (String text) {},
+        Observer(builder: (_) {
+          return Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: CustomTextField(
+              hintText: 'Digite um título',
+              prefix: const Icon(
+                Icons.car_crash_outlined,
               ),
-            );
-          }
-        ),
+              suffix: CustomIconButton(
+                onTap: carListStore.isButtonActive
+                    ? () {
+                        openNewItemDialog(context);
+                      }
+                    : null,
+                icon: Icon(
+                  Icons.send_and_archive_rounded,
+                  color: carListStore.isButtonActive
+                      ? MobCarColors.blueMob
+                      : Colors.grey,
+                ),
+                radius: 32,
+              ),
+              onChanged: carListStore.setNewItemTitle,
+              onSubmitted: (String text) {},
+            ),
+          );
+        }),
         Expanded(
           child: ListView(
             children: [
@@ -108,7 +101,7 @@ class _DashboardState extends State<Dashboard> {
                 titleText: 'Title',
                 year: 'Year',
                 choices: _choices,
-                onSelected: _onSelected, 
+                onSelected: _onSelected,
                 itemBuilder: (context) {
                   return _choices.map((String choice) {
                     return PopupMenuItem(
@@ -127,62 +120,15 @@ class _DashboardState extends State<Dashboard> {
 
   Future<dynamic> openNewItemDialog(BuildContext context) {
     return showDialog(
-      context: context, 
+      context: context,
       builder: (context) {
-        return Dialog(
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Column(
-              children: <Widget> [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget> [
-                    const FaIcon(FontAwesomeIcons.carSide),
-                    const Text('Title'),
-                    CustomIconButton(
-                      icon: const Icon(
-                        Icons.close_rounded,
-                        color: Colors.red,
-                      ),
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
-                      radius: 32,
-                    ),
-                  ],
-                ),
-                Column(
-                  children: <Widget> [
-                    const FaIcon(FontAwesomeIcons.car, size: 60),
-                    FutureBuilder<List<Brand>>(
-                      future: requests.getBrands(),
-                      builder: (context, snapshot) {
-                        if(!snapshot.hasData) {
-                          return const Text('SEM DADOS');
-                        } else if (snapshot.hasData){
-                          return DropdownButton<Brand>(
-                            items: snapshot.data!.map((Brand e) {
-                              return DropdownMenuItem<Brand>(child: Text('${e.name}'));
-                            }).toList(),
-                            onChanged: (brand) {}
-                          );
-                        } else {
-                          return const CircularProgressIndicator();
-                        }
-                      }
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        );
+        return const Dialog(child: NewCarForm()); 
       },
     );
   }
 
   void _onSelected(String choice) {
-    switch(choice) {
+    switch (choice) {
       case 'Ver':
         print('Ver');
         break;

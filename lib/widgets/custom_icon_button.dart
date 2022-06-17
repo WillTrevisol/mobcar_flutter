@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mobcar/main.dart';
-import 'package:mobcar/theme.dart';
 
 class CustomIconButton extends StatelessWidget {
 
-  // ignore: use_key_in_widget_constructors
-  const CustomIconButton({this.radius, this.icon, this.onTap});
+  const CustomIconButton({Key? key, this.radius, this.icon, this.onTap}) : super(key: key);
 
   final double? radius;
   final Icon? icon;

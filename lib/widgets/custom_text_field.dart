@@ -3,7 +3,7 @@ import 'package:mobcar/theme.dart';
 
 class CustomTextField extends StatelessWidget {
 
-  CustomTextField({this.controller, this.onChanged, this.onSubmitted, this.textInputType, this.hintText, this.prefix, this.suffix});
+  const CustomTextField({Key? key, this.controller, this.onChanged, this.onSubmitted, this.textInputType, this.hintText, this.prefix, this.suffix}) : super(key: key);
 
   final TextEditingController? controller;
   final Function(String)? onChanged;
