@@ -27,6 +27,26 @@ class Car {
     return car;
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      'Valor': value,
+      'Marca': brand,
+      'Modelo': model,
+      'AnoModelo': year,
+      'Combustivel': fipeCode,
+      'MesReferencia': refMonth,
+      'TipoVeiculo': vehicleType,
+      'SiglaCombustivel': fuelChar,
+    };
+  }
+
+  String toShortString() {
+    return '''Value: $value, 
+      Brand: $brand, 
+      Model: $model, 
+      Year: $year''';
+  }
+
   @override
   String toString() {
     return '''Value: $value, 

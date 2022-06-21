@@ -12,4 +12,13 @@ class CarYear {
 
     return year;
   }
+
+  String toShortString() {
+    return 'Name: $name';
+  }
+
+  @override
+  String toString() {
+    return 'Name: $name, Code: $code';
+  }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'screens/dashboard.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MobCar());
 }
 

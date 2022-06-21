@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'new_car_store.dart';
+part of 'car_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,25 +8,25 @@ part of 'new_car_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$NewCarStore on _NewCarStoreBase, Store {
+mixin _$CarStore on _CarStoreBase, Store {
   late final _$brandsAtom =
-      Atom(name: '_NewCarStoreBase.brands', context: context);
+      Atom(name: '_CarStoreBase.brands', context: context);
 
   @override
-  List<CarBrand> get brands {
+  ObservableList<CarBrand> get brands {
     _$brandsAtom.reportRead();
     return super.brands;
   }
 
   @override
-  set brands(List<CarBrand> value) {
+  set brands(ObservableList<CarBrand> value) {
     _$brandsAtom.reportWrite(value, super.brands, () {
       super.brands = value;
     });
   }
 
   late final _$carBrandAtom =
-      Atom(name: '_NewCarStoreBase.carBrand', context: context);
+      Atom(name: '_CarStoreBase.carBrand', context: context);
 
   @override
   CarBrand? get carBrand {
@@ -42,7 +42,7 @@ mixin _$NewCarStore on _NewCarStoreBase, Store {
   }
 
   late final _$brandCodeAtom =
-      Atom(name: '_NewCarStoreBase.brandCode', context: context);
+      Atom(name: '_CarStoreBase.brandCode', context: context);
 
   @override
   String? get brandCode {
@@ -58,23 +58,23 @@ mixin _$NewCarStore on _NewCarStoreBase, Store {
   }
 
   late final _$modelsAtom =
-      Atom(name: '_NewCarStoreBase.models', context: context);
+      Atom(name: '_CarStoreBase.models', context: context);
 
   @override
-  List<CarModel> get models {
+  ObservableList<CarModel> get models {
     _$modelsAtom.reportRead();
     return super.models;
   }
 
   @override
-  set models(List<CarModel> value) {
+  set models(ObservableList<CarModel> value) {
     _$modelsAtom.reportWrite(value, super.models, () {
       super.models = value;
     });
   }
 
   late final _$carModelAtom =
-      Atom(name: '_NewCarStoreBase.carModel', context: context);
+      Atom(name: '_CarStoreBase.carModel', context: context);
 
   @override
   CarModel? get carModel {
@@ -90,7 +90,7 @@ mixin _$NewCarStore on _NewCarStoreBase, Store {
   }
 
   late final _$modelCodeAtom =
-      Atom(name: '_NewCarStoreBase.modelCode', context: context);
+      Atom(name: '_CarStoreBase.modelCode', context: context);
 
   @override
   int? get modelCode {
@@ -105,24 +105,23 @@ mixin _$NewCarStore on _NewCarStoreBase, Store {
     });
   }
 
-  late final _$yearsAtom =
-      Atom(name: '_NewCarStoreBase.years', context: context);
+  late final _$yearsAtom = Atom(name: '_CarStoreBase.years', context: context);
 
   @override
-  List<CarYear> get years {
+  ObservableList<CarYear> get years {
     _$yearsAtom.reportRead();
     return super.years;
   }
 
   @override
-  set years(List<CarYear> value) {
+  set years(ObservableList<CarYear> value) {
     _$yearsAtom.reportWrite(value, super.years, () {
       super.years = value;
     });
   }
 
   late final _$carYearAtom =
-      Atom(name: '_NewCarStoreBase.carYear', context: context);
+      Atom(name: '_CarStoreBase.carYear', context: context);
 
   @override
   CarYear? get carYear {
@@ -138,7 +137,7 @@ mixin _$NewCarStore on _NewCarStoreBase, Store {
   }
 
   late final _$yearCodeAtom =
-      Atom(name: '_NewCarStoreBase.yearCode', context: context);
+      Atom(name: '_CarStoreBase.yearCode', context: context);
 
   @override
   String? get yearCode {
@@ -153,7 +152,7 @@ mixin _$NewCarStore on _NewCarStoreBase, Store {
     });
   }
 
-  late final _$carAtom = Atom(name: '_NewCarStoreBase.car', context: context);
+  late final _$carAtom = Atom(name: '_CarStoreBase.car', context: context);
 
   @override
   Car? get car {
@@ -168,116 +167,142 @@ mixin _$NewCarStore on _NewCarStoreBase, Store {
     });
   }
 
-  late final _$_NewCarStoreBaseActionController =
-      ActionController(name: '_NewCarStoreBase', context: context);
+  late final _$carsAtom = Atom(name: '_CarStoreBase.cars', context: context);
+
+  @override
+  ObservableList<Car> get cars {
+    _$carsAtom.reportRead();
+    return super.cars;
+  }
+
+  @override
+  set cars(ObservableList<Car> value) {
+    _$carsAtom.reportWrite(value, super.cars, () {
+      super.cars = value;
+    });
+  }
+
+  late final _$_CarStoreBaseActionController =
+      ActionController(name: '_CarStoreBase', context: context);
 
   @override
   void addBrands(List<CarBrand> data) {
-    final _$actionInfo = _$_NewCarStoreBaseActionController.startAction(
-        name: '_NewCarStoreBase.addBrands');
+    final _$actionInfo = _$_CarStoreBaseActionController.startAction(
+        name: '_CarStoreBase.addBrands');
     try {
       return super.addBrands(data);
     } finally {
-      _$_NewCarStoreBaseActionController.endAction(_$actionInfo);
+      _$_CarStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setCarBrand(CarBrand? value) {
-    final _$actionInfo = _$_NewCarStoreBaseActionController.startAction(
-        name: '_NewCarStoreBase.setCarBrand');
+    final _$actionInfo = _$_CarStoreBaseActionController.startAction(
+        name: '_CarStoreBase.setCarBrand');
     try {
       return super.setCarBrand(value);
     } finally {
-      _$_NewCarStoreBaseActionController.endAction(_$actionInfo);
+      _$_CarStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setBrandCode(String? value) {
-    final _$actionInfo = _$_NewCarStoreBaseActionController.startAction(
-        name: '_NewCarStoreBase.setBrandCode');
+    final _$actionInfo = _$_CarStoreBaseActionController.startAction(
+        name: '_CarStoreBase.setBrandCode');
     try {
       return super.setBrandCode(value);
     } finally {
-      _$_NewCarStoreBaseActionController.endAction(_$actionInfo);
+      _$_CarStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void addModels(List<CarModel> data) {
-    final _$actionInfo = _$_NewCarStoreBaseActionController.startAction(
-        name: '_NewCarStoreBase.addModels');
+    final _$actionInfo = _$_CarStoreBaseActionController.startAction(
+        name: '_CarStoreBase.addModels');
     try {
       return super.addModels(data);
     } finally {
-      _$_NewCarStoreBaseActionController.endAction(_$actionInfo);
+      _$_CarStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setCarModel(CarModel value) {
-    final _$actionInfo = _$_NewCarStoreBaseActionController.startAction(
-        name: '_NewCarStoreBase.setCarModel');
+    final _$actionInfo = _$_CarStoreBaseActionController.startAction(
+        name: '_CarStoreBase.setCarModel');
     try {
       return super.setCarModel(value);
     } finally {
-      _$_NewCarStoreBaseActionController.endAction(_$actionInfo);
+      _$_CarStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setModelCode(int? value) {
-    final _$actionInfo = _$_NewCarStoreBaseActionController.startAction(
-        name: '_NewCarStoreBase.setModelCode');
+    final _$actionInfo = _$_CarStoreBaseActionController.startAction(
+        name: '_CarStoreBase.setModelCode');
     try {
       return super.setModelCode(value);
     } finally {
-      _$_NewCarStoreBaseActionController.endAction(_$actionInfo);
+      _$_CarStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void addYears(List<CarYear> data) {
-    final _$actionInfo = _$_NewCarStoreBaseActionController.startAction(
-        name: '_NewCarStoreBase.addYears');
+    final _$actionInfo = _$_CarStoreBaseActionController.startAction(
+        name: '_CarStoreBase.addYears');
     try {
       return super.addYears(data);
     } finally {
-      _$_NewCarStoreBaseActionController.endAction(_$actionInfo);
+      _$_CarStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setCarYear(CarYear? value) {
-    final _$actionInfo = _$_NewCarStoreBaseActionController.startAction(
-        name: '_NewCarStoreBase.setCarYear');
+    final _$actionInfo = _$_CarStoreBaseActionController.startAction(
+        name: '_CarStoreBase.setCarYear');
     try {
       return super.setCarYear(value);
     } finally {
-      _$_NewCarStoreBaseActionController.endAction(_$actionInfo);
+      _$_CarStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setYearCode(String? value) {
-    final _$actionInfo = _$_NewCarStoreBaseActionController.startAction(
-        name: '_NewCarStoreBase.setYearCode');
+    final _$actionInfo = _$_CarStoreBaseActionController.startAction(
+        name: '_CarStoreBase.setYearCode');
     try {
       return super.setYearCode(value);
     } finally {
-      _$_NewCarStoreBaseActionController.endAction(_$actionInfo);
+      _$_CarStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setCar(Car value) {
-    final _$actionInfo = _$_NewCarStoreBaseActionController.startAction(
-        name: '_NewCarStoreBase.setCar');
+    final _$actionInfo = _$_CarStoreBaseActionController.startAction(
+        name: '_CarStoreBase.setCar');
     try {
       return super.setCar(value);
     } finally {
-      _$_NewCarStoreBaseActionController.endAction(_$actionInfo);
+      _$_CarStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void addCar() {
+    final _$actionInfo = _$_CarStoreBaseActionController.startAction(
+        name: '_CarStoreBase.addCar');
+    try {
+      return super.addCar();
+    } finally {
+      _$_CarStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
@@ -293,7 +318,8 @@ modelCode: ${modelCode},
 years: ${years},
 carYear: ${carYear},
 yearCode: ${yearCode},
-car: ${car}
+car: ${car},
+cars: ${cars}
     ''';
   }
 }
