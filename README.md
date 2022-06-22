@@ -1,16 +1,27 @@
-# mobcar
+# MOBCAR
 
-A new Flutter project.
+Esse é um aplicativo desenvolvido em FLUTTER, onde o mesmo realiza cadastro de veículos com dados da api FIPE API HTTP REST disponível com documentação disponível no link (https://deividfortuna.github.io/fipe/), sendo possível visualizar marcas, modelos, e valores fipe de carros.
 
-## Getting Started
+## Fluxo do aplicativo
 
-This project is a starting point for a Flutter application.
+<p align="center">
+<img src="assets/readme_files/mobcar.gif" width="300"> <br>
+<img src="assets/readme_files/screen1.png" width="300">
+<img src="assets/readme_files/screen2.png" width="300">
+<img src="assets/readme_files/screen3.png" width="300">
+<img src="assets/readme_files/screen4.png" width="300">
+<img src="assets/readme_files/screen5.png" width="300">
+</p>
 
-A few resources to get you started if this is your first Flutter project:
+## Dependências do aplicativo
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<ul> 
+    <li>http</li>
+    <li>flutter_mobx</li>
+    <li>mobx</li>
+    <li>font_awesome_flutter</li>
+    <li>shared_preferences</li>
+    <li>get_it</li>
+    <li>mobx_codegen</li>
+    <li>build_runner</li>
+</ul>

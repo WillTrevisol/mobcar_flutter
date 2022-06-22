@@ -124,6 +124,7 @@ abstract class _CarStoreBase with Store {
 
   @action
   void clearFields() {
+    brands.clear();
     carBrand = null;
     brandCode = null;
     models.clear();
