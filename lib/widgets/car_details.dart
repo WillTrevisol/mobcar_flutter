@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mobcar/colors.dart';
 import 'package:mobcar/widgets/custom_elevated_button.dart';
 
 import '../models/car.dart';
 
 class CarDetails extends StatelessWidget {
-  const CarDetails({Key? key, required this.car}) : super(key: key);
+  CarDetails({Key? key, required this.car}) : super(key: key);
 
   final Car car;
+  final List<Widget> stars = [
+    Icon(Icons.star, color: MobCarColors.yellowMob),
+    Icon(Icons.star, color: MobCarColors.yellowMob),
+    Icon(Icons.star, color: MobCarColors.yellowMob),
+    Icon(Icons.star, color: MobCarColors.yellowMob),
+    Icon(Icons.star, color: MobCarColors.yellowMob)
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +29,7 @@ class CarDetails extends StatelessWidget {
             children: <Widget>[
               const FaIcon(FontAwesomeIcons.car),
               Text(
-                car.brand.toString(),
+                '${car.brand}',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
@@ -35,7 +43,14 @@ class CarDetails extends StatelessWidget {
               ),
             ],
           ),
-          Image.asset('assets/images/voyage-sedan.png', scale: 2),
+          Stack(
+            children: [
+              Image.asset('assets/images/voyage-sedan.png', scale: 2),
+              Row(
+                children: stars,
+              ),
+            ],
+          ),
           const SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,10 +60,10 @@ class CarDetails extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget> [
                   const Text('Marca', style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text(car.brand.toString(), style: const TextStyle(fontSize: 12)),
+                  Text('${car.brand}', style: const TextStyle(fontSize: 12)),
                   const SizedBox(height: 20),
                   const Text('Modelo', style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text(car.model.toString(), style: const TextStyle(fontSize: 12)),
+                  Text('${car.model}', style: const TextStyle(fontSize: 12)),
                 ],
               ),
               Column(
@@ -56,10 +71,10 @@ class CarDetails extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget> [
                   const Text('Ano', style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text(car.year.toString(), style: const TextStyle(fontSize: 12)),
+                  Text('${car.year}', style: const TextStyle(fontSize: 12)),
                   const SizedBox(height: 20),
                   const Text('Valor', style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text(car.value.toString(), style: const TextStyle(fontSize: 12)),
+                  Text('${car.value}', style: const TextStyle(fontSize: 12)),
                 ],
               )
             ],

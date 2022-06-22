@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:mobcar/stores/car_store.dart';
 import 'screens/dashboard.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  GetIt getIt = GetIt.I;
+  getIt.registerSingleton<CarStore>(CarStore());
   runApp(const MobCar());
 }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get_it/get_it.dart';
 
 import '../communication.dart/repository.dart';
 import '../models/car_brand.dart';
@@ -9,17 +10,16 @@ import '../models/car_year.dart';
 import '../stores/car_store.dart';
 import 'custom_elevated_button.dart';
 
-class NewCarForm extends StatefulWidget {
+class CarForm extends StatefulWidget {
 
-  const NewCarForm({Key? key, required this.carStore}) : super(key: key);
-
-  final CarStore carStore;
+  const CarForm({Key? key}) : super(key: key);
 
   @override
-  State<NewCarForm> createState() => _NewCarFormState();
+  State<CarForm> createState() => _CarFormState();
 }
 
-class _NewCarFormState extends State<NewCarForm> {
+class _CarFormState extends State<CarForm> {
+  final carStore = GetIt.I.get<CarStore>();
   final _formKey = GlobalKey<FormState>();
   TextEditingController textEditingController = TextEditingController();
   InputDecoration _inputDecoration({String? text}) {
@@ -71,19 +71,20 @@ class _NewCarFormState extends State<NewCarForm> {
             Observer( 
               builder: (_) {
                 return DropdownButtonFormField<CarBrand>(
+                  validator: validator,
                   decoration: _inputDecoration(),
                   isExpanded: true,
-                  value: widget.carStore.carBrand,
-                  items: widget.carStore.brands.map((CarBrand carBrand) {
+                  value: carStore.carBrand,
+                  items: carStore.brands.map((CarBrand carBrand) {
                     return DropdownMenuItem(
                       value: carBrand,
-                      child: Text(carBrand.name.toString()),
+                      child: Text('${carBrand.name}'),
                     );
                   }).toList(),
                   hint: const Text('Selecione uma marca'),
                   onChanged: (CarBrand? newValue) {
-                    widget.carStore.setCarBrand(newValue);
-                    widget.carStore.setBrandCode(newValue!.code);
+                    carStore.setCarBrand(newValue);
+                    carStore.setBrandCode(newValue!.code);
                     textEditingController.clear();
                     getModels();
                   }
@@ -94,19 +95,20 @@ class _NewCarFormState extends State<NewCarForm> {
             Observer(
               builder: (_) {
                 return DropdownButtonFormField<CarModel>(
+                  validator: validator,
                   decoration: _inputDecoration(),
                   isExpanded: true,
-                  value: widget.carStore.carModel,
-                  items: widget.carStore.models.map((CarModel carModel) {
+                  value: carStore.carModel,
+                  items: carStore.models.map((CarModel carModel) {
                     return DropdownMenuItem(
                       value: carModel,
-                      child: Text(carModel.name.toString()),
+                      child: Text('${carModel.name}'),
                     );
                   }).toList(),
                   hint: const Text('Selecione um modelo'),
                   onChanged: (CarModel? newValue) {
-                    widget.carStore.setModelCode(newValue!.code);
-                    widget.carStore.setCarModel(newValue);
+                    carStore.setModelCode(newValue!.code);
+                    carStore.setCarModel(newValue);
                     textEditingController.clear();
                     getYears();
                   }
@@ -117,19 +119,20 @@ class _NewCarFormState extends State<NewCarForm> {
             Observer(
               builder: (_) {
                 return DropdownButtonFormField<CarYear>(
+                  validator: validator,
                   decoration: _inputDecoration(),
                   isExpanded: true,
-                  value: widget.carStore.carYear,
-                  items: widget.carStore.years.map((CarYear carYear) {
+                  value: carStore.carYear,
+                  items: carStore.years.map((CarYear carYear) {
                     return DropdownMenuItem(
                       value: carYear,
-                      child: Text(carYear.name.toString()),
+                      child: Text('${carYear.name}'),
                     );
                   }).toList(),
                   hint: const Text('Selecione um ano'),
                   onChanged: (CarYear? newValue) {
-                    widget.carStore.setYearCode(newValue!.code);
-                    widget.carStore.setCarYear(newValue);
+                    carStore.setYearCode(newValue!.code);
+                    carStore.setCarYear(newValue);
                     getCar();
                   }
                 );
@@ -157,10 +160,12 @@ class _NewCarFormState extends State<NewCarForm> {
                 const SizedBox(width: 12),
                 CustomElevatedButton(
                   onPressed: () {
-                    widget.carStore.addCar();
-                    widget.carStore.saveList();
-                    widget.carStore.clearFields();
-                    Navigator.pop(context);
+                    if (_formKey.currentState!.validate()) {
+                      carStore.addCar();
+                      carStore.saveList();
+                      carStore.clearFields();
+                      Navigator.pop(context);
+                    }
                   },
                   color: Colors.black,
                   textColor: Colors.white,
@@ -176,29 +181,36 @@ class _NewCarFormState extends State<NewCarForm> {
 
   Future<void> getBrands() async {
     final data = await repository.getCarBrands();
-    widget.carStore.addBrands(data);
+    carStore.addBrands(data);
   }
 
   Future<void> getModels() async {
     final data =
-      await repository.getCarModels(brandCode: widget.carStore.brandCode);
-    widget.carStore.addModels(data);
+      await repository.getCarModels(brandCode: carStore.brandCode);
+    carStore.addModels(data);
   }
 
   Future<void> getYears() async {
     final data = await repository.getCarYears(
-      brandCode: widget.carStore.brandCode, 
-      modelCode: widget.carStore.modelCode);
-    widget.carStore.addYears(data);
+      brandCode: carStore.brandCode, 
+      modelCode: carStore.modelCode);
+    carStore.addYears(data);
   }
 
   Future<void> getCar() async {
     final data = await repository.getCar(
-      brandCode: widget.carStore.brandCode,
-      modelCode: widget.carStore.modelCode,
-      yearCode: widget.carStore.yearCode);
-    widget.carStore.setCar(data);
+      brandCode: carStore.brandCode,
+      modelCode: carStore.modelCode,
+      yearCode: carStore.yearCode);
+    carStore.setCar(data);
 
-    textEditingController.text = widget.carStore.car!.value.toString(); 
+    textEditingController.text = carStore.car!.value.toString(); 
+  }
+
+  String? validator(Object? value) {
+    if (value == null) {
+      return 'Campo obrigatório';
+    }
+    return null;
   }
 }

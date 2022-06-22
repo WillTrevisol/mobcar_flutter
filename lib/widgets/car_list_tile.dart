@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mobcar/widgets/custom_elevated_button.dart';
 
 import '../models/car.dart';
@@ -8,14 +9,12 @@ import 'car_details.dart';
 
 class CarListTile extends StatelessWidget {
 
-  CarListTile({Key? key, required this.car, required this.carStore}) : super(key: key);
+  CarListTile({Key? key, required this.car}) : super(key: key);
 
   final Car car;
-  final CarStore carStore;
-
+  final carStore = GetIt.I.get<CarStore>();
   final List<String> _choices = [
     'Ver',
-    'Editar',
     'Deletar',
   ];
 
@@ -28,14 +27,14 @@ class CarListTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text(
-            car.model.toString(),
+            '${car.model}',
             style: const TextStyle(
               fontSize: 16, 
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
-            car.year.toString(),
+            '${car.year}',
             style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w400,
@@ -54,9 +53,6 @@ class CarListTile extends StatelessWidget {
           switch (choice) {
             case 'Ver':
               showCarDetails(context, car);
-              break;
-            case 'Editar':
-              print('Editar');
               break;
             case 'Deletar':
               showDeleteDialog(context, car);
@@ -128,7 +124,7 @@ class CarListTile extends StatelessWidget {
             color: Colors.black, 
             textColor: Colors.white,
           ),
-        ]
+        ],
       ),
     );
   }

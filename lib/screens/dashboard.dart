@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mobcar/colors.dart';
 import 'package:mobcar/stores/car_store.dart';
 import 'package:mobcar/widgets/car_list_tile.dart';
 import 'package:mobcar/widgets/custom_elevated_button.dart';
-import 'package:mobcar/widgets/new_car_form.dart';
+import 'package:mobcar/widgets/car_form.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -15,15 +16,16 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
 
-  CarStore carStore = CarStore();
+  final carStore = GetIt.I.get<CarStore>();
+
+  @override
+  void initState() {
+    carStore.getCarsList();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-
-    if (carStore.cars.isEmpty) { 
-      carStore.getCarsList();
-    }
-
     return Scaffold(
       appBar: _appBar(),
       body: _body(context, carStore),
@@ -75,7 +77,7 @@ class _DashboardState extends State<Dashboard> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                'Carros salvos',
+                'Veículos salvos',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
               ),
               CustomElevatedButton(
@@ -93,7 +95,7 @@ class _DashboardState extends State<Dashboard> {
             builder: (_) {
               return ListView.separated(
                 itemBuilder: (BuildContext context, int index) => 
-                  CarListTile(car: carStore.cars[index], carStore: carStore),
+                  CarListTile(car: carStore.cars[index]),
                 separatorBuilder: (BuildContext context, int index) => const Divider(),
                 itemCount: carStore.cars.length,
               );
@@ -130,7 +132,7 @@ class _DashboardState extends State<Dashboard> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          child: NewCarForm(carStore: carStore),
+          child: const CarForm(),
         );
       },
     );
