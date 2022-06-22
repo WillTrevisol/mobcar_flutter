@@ -89,16 +89,16 @@ class _DashboardState extends State<Dashboard> {
             ],
           ),
         ),
-        const Divider(),
+        const Divider(color: Colors.black, indent: 2, endIndent: 2),
         Expanded(
           child: Observer(
             builder: (_) {
-              return ListView.separated(
+              return carStore.cars.isNotEmpty ? ListView.separated(
                 itemBuilder: (BuildContext context, int index) => 
                   CarListTile(car: carStore.cars[index]),
-                separatorBuilder: (BuildContext context, int index) => const Divider(),
+                separatorBuilder: (BuildContext context, int index) => const Divider(color: Colors.black, indent: 12, endIndent: 12),
                 itemCount: carStore.cars.length,
-              );
+              ) : const Center(child: Text('Nenhum veículo cadastrado.', style: TextStyle(fontSize: 18)));
             }
           ),
         ),

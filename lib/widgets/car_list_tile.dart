@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
+import 'package:mobcar/screens/image_screen.dart';
 import 'package:mobcar/widgets/custom_elevated_button.dart';
 
 import '../models/car.dart';
@@ -21,7 +22,13 @@ class CarListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Image.asset('assets/images/voyage-sedan.png'),
+      leading: GestureDetector(
+        child: Hero(
+          tag: car.toString(),
+          child: Image.asset('assets/images/voyage-sedan.png'),
+        ),
+        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ImageScreen(car: car))),
+      ),
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
