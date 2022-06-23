@@ -1,6 +1,6 @@
 # MOBCAR
 
-Esse é um aplicativo desenvolvido em FLUTTER, onde o mesmo realiza cadastro de veículos com dados da api FIPE API HTTP REST disponível com documentação disponível no link (https://deividfortuna.github.io/fipe/), sendo possível visualizar marcas, modelos, e valores fipe de carros.
+Trata-se de um aplicativo desenvolvido em FLUTTER, onde o mesmo realiza cadastro de veículos com dados da api FIPE API HTTP REST com documentação disponível no link (https://deividfortuna.github.io/fipe/), sendo possível visualizar marcas, modelos, e valores fipe de carros.
 
 ## Fluxo do aplicativo
 
