@@ -86,9 +86,10 @@ class CarDetails extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
               }, 
-              text: 'Reservar', 
+              widget: const Text(
+                'Reservar'
+              ), 
               color: Colors.black, 
-              textColor: Colors.white,
             ),
           ),
         ],

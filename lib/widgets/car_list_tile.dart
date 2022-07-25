@@ -120,16 +120,21 @@ class CarListTile extends StatelessWidget {
         actions: [
           CustomElevatedButton(
             onPressed: () => Navigator.of(context).pop(), 
-            text: 'Cancelar', 
+            widget: const Text(
+              'Cancelar',
+              style: TextStyle(
+                color: Colors.black,
+              ),
+            ), 
             color: Colors.white, 
-            textColor: Colors.black,
             borderColor: Colors.black,
           ),
           CustomElevatedButton(
             onPressed: () => carStore.removeCar(car).then((value) => Navigator.of(context).pop()), 
-            text: 'Confirmar', 
-            color: Colors.black, 
-            textColor: Colors.white,
+            widget: const Text(
+              'Confirmar'
+            ), 
+            color: Colors.black,
           ),
         ],
       ),

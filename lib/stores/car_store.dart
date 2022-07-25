@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../communication.dart/repository.dart';
 import '../models/car.dart';
 import '../models/car_brand.dart';
 import '../models/car_model.dart';
@@ -20,6 +21,7 @@ abstract class _CarStoreBase with Store {
 
   _CarStoreBase() {
     SharedPreferences.getInstance().then((value) => sharedPreferences = value);
+    getBrands();
   }
   
   @observable
@@ -109,7 +111,7 @@ abstract class _CarStoreBase with Store {
   }
 
   @action
-  void saveList() async {
+  void saveList() {
     final carsListJson = jsonEncode(cars);
     sharedPreferences.setString(carsKey, carsListJson);
   }
@@ -133,6 +135,83 @@ abstract class _CarStoreBase with Store {
     years.clear();
     carYear = null;
     yearCode = null;
+  }
+
+  @observable
+  String carValue = '';
+
+  @action
+  void setCarValue(String value) => carValue = value;
+
+  @observable
+  dynamic error;
+
+  @action
+  void setError(dynamic value) => error = value;
+
+  @observable
+  bool loading = false;
+
+  @action
+  void setLoading(bool value) => loading = value;
+
+  Future<void> getBrands() async {
+    setError(null);
+    setLoading(true);
+
+    try {
+      final data = await Repository().getCarBrands();
+      addBrands(data);
+    } catch (e) {
+      setError(e);
+    }
+    setLoading(false);
+  }
+
+  Future<void> getModels() async {
+    setError(null);
+    setLoading(true);
+
+    try {
+      final data =
+        await Repository().getCarModels(brandCode: brandCode);
+      addModels(data);
+    } catch (e) {
+      setError(e);
+    }
+    setLoading(false);
+  }
+
+  Future<void> getYears() async {
+    setError(null);
+    setLoading(true);
+
+    try {
+      final data = await Repository().getCarYears(
+      brandCode: brandCode, 
+      modelCode: modelCode);
+      addYears(data); 
+    } catch (e) {
+      setError(e);
+    }
+    setLoading(false);
+  } 
+
+  Future<void> getCar() async {
+    setError(null);
+    setLoading(true);
+
+    try {
+      final data = await Repository().getCar(
+        brandCode: brandCode,
+        modelCode: modelCode,
+        yearCode: yearCode);
+      setCar(data);
+      setCarValue(car!.value.toString());
+    } catch (e) {
+      setError(e);
+    }
+    setLoading(false);
   }
   
 } 

@@ -3,7 +3,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 
-import '../communication.dart/repository.dart';
 import '../models/car_brand.dart';
 import '../models/car_model.dart';
 import '../models/car_year.dart';
@@ -11,7 +10,6 @@ import '../stores/car_store.dart';
 import 'custom_elevated_button.dart';
 
 class CarForm extends StatefulWidget {
-
   const CarForm({Key? key}) : super(key: key);
 
   @override
@@ -19,9 +17,8 @@ class CarForm extends StatefulWidget {
 }
 
 class _CarFormState extends State<CarForm> {
-  final carStore = GetIt.I.get<CarStore>();
+  final CarStore controller = GetIt.I.get<CarStore>();
   final _formKey = GlobalKey<FormState>();
-  TextEditingController textEditingController = TextEditingController();
   InputDecoration _inputDecoration({String? text}) {
     return InputDecoration(
       hintText: text ?? '',
@@ -30,11 +27,10 @@ class _CarFormState extends State<CarForm> {
         borderRadius: BorderRadius.circular(4),
       ),
     );
-  } 
+  }
 
   @override
   void initState() {
-    getBrands();
     super.initState();
   }
 
@@ -44,167 +40,200 @@ class _CarFormState extends State<CarForm> {
       key: _formKey,
       child: Container(
         padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Observer(
+          builder: (_) {
+            if (controller.error != null) {
+              return SizedBox(
+                height: MediaQuery.of(context).size.height * 0.2,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget> [
+                    const Icon(
+                      Icons.wifi_off,
+                      size: 60,
+                    ),
+                    Text(
+                      controller.error,
+
+                    ),
+                    CustomElevatedButton(
+                      onPressed: () {
+                        controller.getBrands();
+                        controller.clearFields();
+                      }, 
+                      widget: const Text('Tentar novamente'), 
+                      color: Colors.black, 
+                    ),
+                  ],
+                ),
+              );
+            }
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                const FaIcon(FontAwesomeIcons.car),
-                const Text(
-                  'Novo carro',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    const FaIcon(FontAwesomeIcons.car),
+                    const Text(
+                      'Novo carro',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      icon: const Icon(Icons.close),
+                    ),
+                  ],
                 ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
+                const SizedBox(height: 20),
+                Observer(
+                  builder: (_) {
+                    return DropdownButtonFormField<CarBrand>(
+                      validator: validator,
+                      decoration: _inputDecoration(),
+                      isExpanded: true,
+                      value: controller.carBrand,
+                      items: controller.brands.map((CarBrand carBrand) {
+                        return DropdownMenuItem(
+                          value: carBrand,
+                          child: Text('${carBrand.name}'),
+                        );
+                      }).toList(),
+                      hint: const Text('Selecione uma marca'),
+                      onChanged: (CarBrand? newValue) {
+                        _setNewCarBrand(newValue);
+                      },
+                    );
                   },
-                  icon: const Icon(Icons.close)
+                ),
+                const SizedBox(height: 12),
+                Observer(
+                  builder: (_) {
+                    return DropdownButtonFormField<CarModel>(
+                      validator: validator,
+                      decoration: _inputDecoration(),
+                      isExpanded: true,
+                      value: controller.carModel,
+                      items: controller.models.map((CarModel carModel) {
+                        return DropdownMenuItem(
+                          value: carModel,
+                          child: Text('${carModel.name}'),
+                        );
+                      }).toList(),
+                      hint: const Text('Selecione um modelo'),
+                      onChanged: (CarModel? newValue) {
+                        _setNewCarModel(newValue);
+                      },
+                    );
+                  },
+                ),
+                const SizedBox(height: 12),
+                Observer(
+                  builder: (_) {
+                    return DropdownButtonFormField<CarYear>(
+                      validator: validator,
+                      decoration: _inputDecoration(),
+                      isExpanded: true,
+                      value: controller.carYear,
+                      items: controller.years.map((CarYear carYear) {
+                        return DropdownMenuItem(
+                          value: carYear,
+                          child: Text('${carYear.name}'),
+                        );
+                      }).toList(),
+                      hint: const Text('Selecione um ano'),
+                      onChanged: (CarYear? newValue) {
+                        _setNewCarYear(newValue);
+                      },
+                    );
+                  },
+                ),
+                const SizedBox(height: 12),
+                Observer(
+                  builder: (_) {
+                    return TextFormField(
+                      readOnly: true,
+                      decoration:
+                        _inputDecoration(text: 'Valor ${controller.carValue}'),
+                    );
+                  },
+                ),
+                const SizedBox(height: 12),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    CustomElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      color: Colors.white,
+                      borderColor: Colors.black,
+                      widget: const Text(
+                        'Cancelar',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    CustomElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          _saveNewCar(context);
+                        }
+                      },
+                      color: Colors.black,
+                      widget: controller.loading 
+                        ? const SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(
+                              backgroundColor: Colors.grey,
+                              color: Colors.white
+                            )
+                          )
+                        : const Text('Salvar')
+                    ),
+                  ],
                 ),
               ],
-            ),
-            const SizedBox(height: 20),
-            Observer( 
-              builder: (_) {
-                return DropdownButtonFormField<CarBrand>(
-                  validator: validator,
-                  decoration: _inputDecoration(),
-                  isExpanded: true,
-                  value: carStore.carBrand,
-                  items: carStore.brands.map((CarBrand carBrand) {
-                    return DropdownMenuItem(
-                      value: carBrand,
-                      child: Text('${carBrand.name}'),
-                    );
-                  }).toList(),
-                  hint: const Text('Selecione uma marca'),
-                  onChanged: (CarBrand? newValue) {
-                    carStore.setCarBrand(newValue);
-                    carStore.setBrandCode(newValue!.code);
-                    textEditingController.clear();
-                    getModels();
-                  }
-                );
-              }
-            ),
-            const SizedBox(height: 12),
-            Observer(
-              builder: (_) {
-                return DropdownButtonFormField<CarModel>(
-                  validator: validator,
-                  decoration: _inputDecoration(),
-                  isExpanded: true,
-                  value: carStore.carModel,
-                  items: carStore.models.map((CarModel carModel) {
-                    return DropdownMenuItem(
-                      value: carModel,
-                      child: Text('${carModel.name}'),
-                    );
-                  }).toList(),
-                  hint: const Text('Selecione um modelo'),
-                  onChanged: (CarModel? newValue) {
-                    carStore.setModelCode(newValue!.code);
-                    carStore.setCarModel(newValue);
-                    textEditingController.clear();
-                    getYears();
-                  }
-                );
-              }
-            ),
-            const SizedBox(height: 12),
-            Observer(
-              builder: (_) {
-                return DropdownButtonFormField<CarYear>(
-                  validator: validator,
-                  decoration: _inputDecoration(),
-                  isExpanded: true,
-                  value: carStore.carYear,
-                  items: carStore.years.map((CarYear carYear) {
-                    return DropdownMenuItem(
-                      value: carYear,
-                      child: Text('${carYear.name}'),
-                    );
-                  }).toList(),
-                  hint: const Text('Selecione um ano'),
-                  onChanged: (CarYear? newValue) {
-                    carStore.setYearCode(newValue!.code);
-                    carStore.setCarYear(newValue);
-                    getCar();
-                  }
-                );
-              },
-            ),
-            const SizedBox(height: 12),
-            TextFormField(
-              controller: textEditingController,
-              readOnly: true,
-              decoration: _inputDecoration(text: 'Valor '),
-            ),
-            const SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                CustomElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  color: Colors.white,
-                  textColor: Colors.black,
-                  borderColor: Colors.black,
-                  text: 'Cancelar',
-                ),
-                const SizedBox(width: 12),
-                CustomElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      carStore.addCar();
-                      carStore.saveList();
-                      carStore.clearFields();
-                      Navigator.pop(context);
-                    }
-                  },
-                  color: Colors.black,
-                  textColor: Colors.white,
-                  text: 'Salvar',
-                ),
-              ],
-            ),
-          ],
-        ),
+            );
+          },
+        )
       ),
     );
   }
 
-  Future<void> getBrands() async {
-    final data = await repository.getCarBrands();
-    carStore.addBrands(data);
+  void _saveNewCar(BuildContext context) {
+    controller.addCar();
+    controller.saveList();
+    controller.clearFields();
+    Navigator.pop(context);
   }
 
-  Future<void> getModels() async {
-    final data =
-      await repository.getCarModels(brandCode: carStore.brandCode);
-    carStore.addModels(data);
+  void _setNewCarYear(CarYear? newValue) {
+    controller.setYearCode(newValue!.code);
+    controller.setCarYear(newValue);
+    controller.getCar();
   }
 
-  Future<void> getYears() async {
-    final data = await repository.getCarYears(
-      brandCode: carStore.brandCode, 
-      modelCode: carStore.modelCode);
-    carStore.addYears(data);
+  void _setNewCarModel(CarModel? newValue) {
+    controller.setModelCode(newValue!.code);
+    controller.setCarModel(newValue);
+    controller.getYears();
   }
 
-  Future<void> getCar() async {
-    final data = await repository.getCar(
-      brandCode: carStore.brandCode,
-      modelCode: carStore.modelCode,
-      yearCode: carStore.yearCode);
-    carStore.setCar(data);
-
-    textEditingController.text = carStore.car!.value.toString(); 
+  void _setNewCarBrand(CarBrand? newValue) {
+    controller.setCarBrand(newValue);
+    controller.setBrandCode(newValue!.code);
+    controller.getModels();
   }
 
   String? validator(Object? value) {

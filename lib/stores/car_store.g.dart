@@ -182,6 +182,69 @@ mixin _$CarStore on _CarStoreBase, Store {
     });
   }
 
+  late final _$carValueAtom =
+      Atom(name: '_CarStoreBase.carValue', context: context);
+
+  @override
+  String get carValue {
+    _$carValueAtom.reportRead();
+    return super.carValue;
+  }
+
+  @override
+  set carValue(String value) {
+    _$carValueAtom.reportWrite(value, super.carValue, () {
+      super.carValue = value;
+    });
+  }
+
+  late final _$errorAtom = Atom(name: '_CarStoreBase.error', context: context);
+
+  @override
+  dynamic get error {
+    _$errorAtom.reportRead();
+    return super.error;
+  }
+
+  @override
+  set error(dynamic value) {
+    _$errorAtom.reportWrite(value, super.error, () {
+      super.error = value;
+    });
+  }
+
+  late final _$loadingAtom =
+      Atom(name: '_CarStoreBase.loading', context: context);
+
+  @override
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
+  }
+
+  @override
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
+    });
+  }
+
+  late final _$removeCarAsyncAction =
+      AsyncAction('_CarStoreBase.removeCar', context: context);
+
+  @override
+  Future<void> removeCar(Car car) {
+    return _$removeCarAsyncAction.run(() => super.removeCar(car));
+  }
+
+  late final _$getCarsListAsyncAction =
+      AsyncAction('_CarStoreBase.getCarsList', context: context);
+
+  @override
+  Future<void> getCarsList() {
+    return _$getCarsListAsyncAction.run(() => super.getCarsList());
+  }
+
   late final _$_CarStoreBaseActionController =
       ActionController(name: '_CarStoreBase', context: context);
 
@@ -307,6 +370,61 @@ mixin _$CarStore on _CarStoreBase, Store {
   }
 
   @override
+  void saveList() {
+    final _$actionInfo = _$_CarStoreBaseActionController.startAction(
+        name: '_CarStoreBase.saveList');
+    try {
+      return super.saveList();
+    } finally {
+      _$_CarStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void clearFields() {
+    final _$actionInfo = _$_CarStoreBaseActionController.startAction(
+        name: '_CarStoreBase.clearFields');
+    try {
+      return super.clearFields();
+    } finally {
+      _$_CarStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setCarValue(String value) {
+    final _$actionInfo = _$_CarStoreBaseActionController.startAction(
+        name: '_CarStoreBase.setCarValue');
+    try {
+      return super.setCarValue(value);
+    } finally {
+      _$_CarStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setError(dynamic value) {
+    final _$actionInfo = _$_CarStoreBaseActionController.startAction(
+        name: '_CarStoreBase.setError');
+    try {
+      return super.setError(value);
+    } finally {
+      _$_CarStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setLoading(bool value) {
+    final _$actionInfo = _$_CarStoreBaseActionController.startAction(
+        name: '_CarStoreBase.setLoading');
+    try {
+      return super.setLoading(value);
+    } finally {
+      _$_CarStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 brands: ${brands},
@@ -319,7 +437,10 @@ years: ${years},
 carYear: ${carYear},
 yearCode: ${yearCode},
 car: ${car},
-cars: ${cars}
+cars: ${cars},
+carValue: ${carValue},
+error: ${error},
+loading: ${loading}
     ''';
   }
 }

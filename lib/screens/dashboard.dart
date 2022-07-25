@@ -82,9 +82,8 @@ class _DashboardState extends State<Dashboard> {
               ),
               CustomElevatedButton(
                 onPressed: () => openNewCarDialog(context),
-                text: 'Adicionar',
+                widget: const Text('Adicionar'),
                 color: Colors.black,
-                textColor: Colors.white,
               ),
             ],
           ),

@@ -4,15 +4,13 @@ class CustomElevatedButton extends StatelessWidget {
   
   const CustomElevatedButton({Key? key, 
     required this.onPressed,
-    required this.text, 
-    required this.color, 
-    required this.textColor, 
+    required this.widget, 
+    required this.color,
     this.borderColor}) : super(key: key);
 
   final VoidCallback onPressed;
-  final String text;
+  final Widget widget;
   final Color color;
-  final Color textColor;
   final Color? borderColor;
 
   @override
@@ -29,12 +27,7 @@ class CustomElevatedButton extends StatelessWidget {
           ),
         ),
       ),
-      child: Text(
-        text,
-        style: TextStyle(
-          color: textColor,
-        ),
-      ),
+      child: widget,
     );
   }
 }
