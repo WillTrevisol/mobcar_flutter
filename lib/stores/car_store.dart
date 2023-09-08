@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../communication.dart/repository.dart';
+import '../communication/repository.dart';
 import '../models/car.dart';
 import '../models/car_brand.dart';
 import '../models/car_model.dart';
