@@ -13,7 +13,7 @@ class HttpAdapter implements HttpClient {
     try {
       response = await client.get(Uri.parse(url), headers: {'content-type': 'application/json'});
     } catch (error) {
-      HttpError.serverError;
+      throw HttpError.serverError;
     }
     return HttpResponseAdapter.get(key: response.statusCode, data: response.body);
   }

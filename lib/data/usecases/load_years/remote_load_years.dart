@@ -13,7 +13,7 @@ class RemoteLoadYears implements LoadYears {
   @override
   Future<List<Year>> load({required String brand, required String model}) async {
     try {
-      final response = await httpClient.get(url: '$url/brands/$brand/models/$model/years');
+      final response = await httpClient.get(url: '$url/$brand/models/$model/years');
       return response.map<Year>((year) => RemoteYear.fromMap(year).toDomainEntity()).toList();
     } catch (error) {
       throw error == HttpError.notFound ? DomainError.notFound : DomainError.unexpected;

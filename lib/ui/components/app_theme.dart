@@ -30,5 +30,11 @@ class AppTheme {
         fontSize: 16,
       ),
     ),
+    inputDecorationTheme: InputDecorationTheme(
+      contentPadding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(4),
+      ),
+    ),
   );
 }

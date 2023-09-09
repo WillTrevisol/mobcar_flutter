@@ -4,7 +4,7 @@ description: A new Flutter project.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 environment:
-  sdk: ">=2.17.1 <4.0.0"
+  sdk: ">=2.12.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -18,6 +18,9 @@ dependencies:
   cupertino_icons: ^1.0.6
   equatable: ^2.0.5
   get: ^4.6.6
+  provider: ^6.0.5
+  progress_loader_overlay: ^3.0.3
+  dropdown_search: ^5.0.6
 
 dev_dependencies:
   flutter_test:

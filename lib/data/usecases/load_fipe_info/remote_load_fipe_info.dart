@@ -13,7 +13,7 @@ class RemoteLoadFipeInfo implements LoadFipeInfo {
   @override
   Future<FipeInfo> load({required String brand, required String model, required String year}) async {
     try {
-      final response = await httpClient.get(url: '$url/brands/$brand/models/$model/years/$year');
+      final response = await httpClient.get(url: '$url/$brand/models/$model/years/$year');
       return RemoteFipeInfo.fromMap(response).toDomainEntity();
     } catch (error) {
       throw error == HttpError.notFound ? DomainError.notFound : DomainError.unexpected; 

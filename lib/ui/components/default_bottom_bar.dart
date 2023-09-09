@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DefaultBottomBar extends StatelessWidget {
-  const DefaultBottomBar({super.key});
+  const DefaultBottomBar({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
