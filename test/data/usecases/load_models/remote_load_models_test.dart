@@ -34,7 +34,7 @@ void main() {
   });
 
     test('Should return list of Models on success', () async {
-    final responseList = await systemUnderTest.load('$url/brands/$brand/models');
+    final responseList = await systemUnderTest.load(brand);
 
     expect(responseList, [
       Model(
@@ -50,19 +50,19 @@ void main() {
 
   test('Should throw UnexpectedError if HttpClient returns 200 with invalid data', () async {
     httpClientMock.mockGet([{ 'invalid_key': 'invalid_data' }]);
-    final future = systemUnderTest.load('$url/brands/$brand/models');
+    final future = systemUnderTest.load(brand);
     expect(future, throwsA(DomainError.unexpected));
   });
 
   test('Should throw UnexpectedError if HttpClient returns 500', () async {
     httpClientMock.mockGetError(HttpError.serverError);
-    final future = systemUnderTest.load('$url/brands/$brand/models');
+    final future = systemUnderTest.load(brand);
     expect(future, throwsA(DomainError.unexpected));
   });
 
   test('Should throw NotFoundError if HttpClient returns 404', () async {
     httpClientMock.mockGetError(HttpError.notFound);
-    final future = systemUnderTest.load('$url/brands/$brand/models');
+    final future = systemUnderTest.load(brand);
     expect(future, throwsA(DomainError.notFound));
   });
 }

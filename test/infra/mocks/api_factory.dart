@@ -24,4 +24,23 @@ class ApiFactory {
       'name': '145 Elegant 2.0 16V',
     },
   ];
+
+  static List<Map<String, dynamic>> yearsList() => [
+    {
+      'code': '1998-1',
+      'name': '1998 Gasolina'
+    },
+    {
+      'code': '1997-1',
+      'name': '1997 Gasolina',
+    },
+    {
+      'code': '1996-1',
+      'name': '1996 Gasolina',
+    },
+    {
+      'code': '1995-1',
+      'name': '1995 Gasolina',
+    },
+  ];
 }
