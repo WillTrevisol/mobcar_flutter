@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mobcar/stores/car_store.dart';
-import 'screens/dashboard.dart';
+import 'package:mobcar/old_infra/stores/car_store.dart';
+import 'old_infra/screens/dashboard.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

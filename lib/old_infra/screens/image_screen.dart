@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobcar/colors.dart';
+import 'package:mobcar/old_infra/colors.dart';
 
 import '../models/car.dart';
 

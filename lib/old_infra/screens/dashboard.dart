@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mobcar/colors.dart';
-import 'package:mobcar/stores/car_store.dart';
-import 'package:mobcar/widgets/car_list_tile.dart';
-import 'package:mobcar/widgets/custom_elevated_button.dart';
-import 'package:mobcar/widgets/car_form.dart';
+import 'package:mobcar/old_infra/colors.dart';
+import 'package:mobcar/old_infra/stores/car_store.dart';
+import 'package:mobcar/old_infra/widgets/car_form.dart';
+import 'package:mobcar/old_infra/widgets/car_list_tile.dart';
+import 'package:mobcar/old_infra/widgets/custom_elevated_button.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);

@@ -16,6 +16,7 @@ dependencies:
   shared_preferences: ^2.2.1
   get_it: ^7.6.4
   cupertino_icons: ^1.0.6
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:
@@ -23,6 +24,8 @@ dev_dependencies:
   mobx_codegen: ^2.3.0
   build_runner: ^2.4.6
   flutter_lints: ^2.0.3
+  mocktail: ^1.0.0
+  faker: ^2.1.0
 
 flutter:
 
