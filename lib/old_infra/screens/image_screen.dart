@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobcar/old_infra/colors.dart';
+import 'package:mobcar/ui/components/app_theme.dart';
 
 import '../models/car.dart';
 
@@ -11,10 +11,10 @@ class ImageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MobCarColors.blackMob,
+      backgroundColor: AppTheme.blackMob,
       appBar: AppBar(
         title: Text('${car.brand}'),
-        backgroundColor: MobCarColors.blackMob,
+        backgroundColor: AppTheme.blackMob,
       ),
       body: Center(
         child: Hero(

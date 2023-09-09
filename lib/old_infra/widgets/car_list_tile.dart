@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobcar/old_infra/screens/image_screen.dart';
-import 'package:mobcar/old_infra/widgets/custom_elevated_button.dart';
+import 'package:mobcar/ui/components/custom_elevated_button.dart';
 
 import '../models/car.dart';
 import '../stores/car_store.dart';

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mobcar/old_infra/colors.dart';
+import 'package:mobcar/ui/components/app_theme.dart';
 import 'package:mobcar/old_infra/stores/car_store.dart';
 import 'package:mobcar/old_infra/widgets/car_form.dart';
 import 'package:mobcar/old_infra/widgets/car_list_tile.dart';
-import 'package:mobcar/old_infra/widgets/custom_elevated_button.dart';
+import 'package:mobcar/ui/components/custom_elevated_button.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -35,19 +35,19 @@ class _DashboardState extends State<Dashboard> {
 
   AppBar _appBar() {
     return AppBar(
-      backgroundColor: MobCarColors.blackMob,
+      backgroundColor: AppTheme.blackMob,
       leading: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Icon(
             Icons.blur_circular_outlined,
-            color: MobCarColors.blueMob,
+            color: AppTheme.blueMob,
           ),
           Text(
             'MOBCAR',
             style: TextStyle(
-              color: MobCarColors.blueMob,
+              color: AppTheme.blueMob,
               fontWeight: FontWeight.w100,
               fontSize: 12,
             ),
@@ -58,7 +58,7 @@ class _DashboardState extends State<Dashboard> {
         IconButton(
           icon: Icon(
             Icons.menu_open_outlined,
-            color: MobCarColors.blueMob,
+            color: AppTheme.blueMob,
           ),
           onPressed: () {
           },
@@ -110,12 +110,12 @@ class _DashboardState extends State<Dashboard> {
       height: 35,
       child: BottomAppBar(
         elevation: 0,
-        color: MobCarColors.blackMob,
+        color: AppTheme.blackMob,
         child: Padding(
           padding: const EdgeInsets.only(top: 8),
           child: Text(
             '© 2020. All rights reserved to Mobcar.',
-            style: TextStyle(color: MobCarColors.blueMob, fontSize: 16),
+            style: TextStyle(color: AppTheme.blueMob, fontSize: 16),
             textAlign: TextAlign.center,
           ),
         ),
