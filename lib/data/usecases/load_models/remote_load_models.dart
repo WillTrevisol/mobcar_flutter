@@ -11,9 +11,9 @@ class RemoteLoadModels implements LoadModels {
   final HttpClient httpClient;
 
   @override
-  Future<List<Model>> load() async {
+  Future<List<Model>> load(String brand) async {
     try {
-      final response = await httpClient.get(url: url);
+      final response = await httpClient.get(url: '$url/brands/$brand/models');
       return response.map<Model>((model) => RemoteModel.fromMap(model).toDomainEntity()).toList();
     } catch (error) {
       throw error == HttpError.notFound ? DomainError.notFound : DomainError.unexpected;

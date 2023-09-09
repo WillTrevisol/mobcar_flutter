@@ -15,10 +15,12 @@ void main() {
   late HttpClientMock httpClientMock;
   late RemoteLoadModels systemUnderTest;
   late List<Map<String, dynamic>> modelsList;
+  late String brand;
   late String url;
 
   setUp(() {
     url = faker.internet.httpUrl();
+    brand = faker.vehicle.model();
     modelsList = ApiFactory.modelsList();
     httpClientMock = HttpClientMock();
     systemUnderTest = RemoteLoadModels(url: url, httpClient: httpClientMock);
@@ -26,13 +28,13 @@ void main() {
   });
 
   test('Should call HttpClient with correct values', () async {
-    await systemUnderTest.load();
+    await systemUnderTest.load(brand);
 
-    verify(() => httpClientMock.get(url: url));
+    verify(() => httpClientMock.get(url: '$url/brands/$brand/models')).called(1);
   });
 
     test('Should return list of Models on success', () async {
-    final responseList = await systemUnderTest.load();
+    final responseList = await systemUnderTest.load('$url/brands/$brand/models');
 
     expect(responseList, [
       Model(
@@ -48,19 +50,19 @@ void main() {
 
   test('Should throw UnexpectedError if HttpClient returns 200 with invalid data', () async {
     httpClientMock.mockGet([{ 'invalid_key': 'invalid_data' }]);
-    final future = systemUnderTest.load();
+    final future = systemUnderTest.load('$url/brands/$brand/models');
     expect(future, throwsA(DomainError.unexpected));
   });
 
   test('Should throw UnexpectedError if HttpClient returns 500', () async {
     httpClientMock.mockGetError(HttpError.serverError);
-    final future = systemUnderTest.load();
+    final future = systemUnderTest.load('$url/brands/$brand/models');
     expect(future, throwsA(DomainError.unexpected));
   });
 
   test('Should throw NotFoundError if HttpClient returns 404', () async {
     httpClientMock.mockGetError(HttpError.notFound);
-    final future = systemUnderTest.load();
+    final future = systemUnderTest.load('$url/brands/$brand/models');
     expect(future, throwsA(DomainError.notFound));
   });
 }
