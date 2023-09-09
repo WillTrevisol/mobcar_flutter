@@ -33,7 +33,7 @@ void main() {
     verify(() => httpClientMock.get(url: '$url/brands/$brand/models')).called(1);
   });
 
-    test('Should return list of Models on success', () async {
+  test('Should return list of Models on success', () async {
     final responseList = await systemUnderTest.load(brand);
 
     expect(responseList, [

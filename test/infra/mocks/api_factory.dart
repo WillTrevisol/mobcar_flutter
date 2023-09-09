@@ -43,4 +43,16 @@ class ApiFactory {
       'name': '1995 Gasolina',
     },
   ];
+
+  static Map<String, dynamic> fipeInfo() => {
+    'vehicleType': 1,
+    'price': 'R\$ 16.854,00',
+    'brand': 'Alfa Romeo',
+    'model': '145 Elegant 2.0 16V',
+    'modelYear': 1997,
+    'fuel': 'Gasolina',
+    'codeFipe': '006001-1',
+    'referenceMonth': 'setembro de 2023',
+    'fuelAcronym': 'G',
+  };
 }
