@@ -13,4 +13,15 @@ class ApiFactory {
       'name': 'Alfa Romeo',
     },
   ];
+
+  static List<Map<String, dynamic>> modelsList() => [
+    {
+      'code': '5',
+      'name': '145 Elegant 1.7/1.8 16V'
+    },
+    {
+      'code': '6',
+      'name': '145 Elegant 2.0 16V',
+    },
+  ];
 }
