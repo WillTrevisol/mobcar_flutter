@@ -37,9 +37,9 @@ class _DashboardPageState extends State<DashboardPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
+                    Text(
                       'Veículos salvos',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
                     CustomElevatedButton(
                       onPressed: () => openVehicleForm(context),

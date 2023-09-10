@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:dropdown_search/dropdown_search.dart';
+import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:mobcar/ui/components/components.dart';
 import 'package:mobcar/ui/pages/pages.dart';
-import 'package:provider/provider.dart';
 
 class VehicleForm extends StatelessWidget {
   const VehicleForm({Key? key}) : super(key: key);
@@ -20,7 +19,6 @@ class VehicleForm extends StatelessWidget {
           presenter.loadBrandsData();
         });
 
-        
         return Form(
           child: Container(
             padding: const EdgeInsets.all(20.0),
@@ -32,12 +30,9 @@ class VehicleForm extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     const FaIcon(FontAwesomeIcons.car),
-                    const Text(
+                    Text(
                       'Novo carro',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
                     IconButton(
                       onPressed: () {
@@ -51,28 +46,16 @@ class VehicleForm extends StatelessWidget {
                 StreamBuilder<List<BrandViewEntity>?>(
                   stream: presenter.brandStream,
                   builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                    return DropdownSearch<BrandViewEntity>(
-                      filterFn: (item, filter) {
-                        return item.toString().toLowerCase().contains(filter.toLowerCase());
-                      },
-                      popupProps: const PopupProps.menu(
-                        fit: FlexFit.tight,
-                        showSearchBox: true,
-                        searchFieldProps: TextFieldProps(
-                          decoration: InputDecoration(
-                            isDense: true,
-                          ),
-                        ),
-                        searchDelay: Duration(seconds: 0),
-                      ),
-                      itemAsString: (BrandViewEntity item) => item.name,
+                    return DropdownFormMenu<BrandViewEntity>(
+                      hintText: 'Marca',
+                      itemsLabel: (BrandViewEntity value) => value.name,
                       onChanged: (BrandViewEntity? value) {
                         if (value != null) {
                           presenter.setBrand(value);
                           presenter.loadModelsData();
                         }
                       },
-                      items: snapshot.data ?? [],
+                      items: snapshot.data,
                     );
                   },
                 ),
@@ -80,22 +63,16 @@ class VehicleForm extends StatelessWidget {
                 StreamBuilder<List<ModelViewEntity>?>(
                   stream: presenter.modelStream,
                   builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                    return DropdownSearch<ModelViewEntity>(
-                      filterFn: (item, filter) {
-                        return item.toString().toLowerCase().contains(filter.toLowerCase());
-                      },
-                      popupProps: const PopupProps.menu(
-                        showSearchBox: true,
-                        searchDelay: Duration(seconds: 0),
-                      ),
-                      itemAsString: (ModelViewEntity item) => item.name,
+                    return DropdownFormMenu<ModelViewEntity>(
+                      hintText: 'Modelo',
+                      itemsLabel: (ModelViewEntity value) => value.name,
                       onChanged: (ModelViewEntity? value) {
                         if (value != null) {
                           presenter.setModel(value);
                           presenter.loadYearsData();
                         }
                       },
-                      items: snapshot.data ?? [],
+                      items: snapshot.data,
                     );
                   },
                 ),
@@ -103,22 +80,16 @@ class VehicleForm extends StatelessWidget {
                 StreamBuilder<List<YearViewEntity>?>(
                   stream: presenter.yearStream,
                   builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                    return DropdownSearch<YearViewEntity>(
-                      filterFn: (item, filter) {
-                        return item.toString().toLowerCase().contains(filter.toLowerCase());
-                      },
-                      popupProps: const PopupProps.menu(
-                        showSearchBox: true,
-                        searchDelay: Duration(seconds: 0),
-                      ),
-                      itemAsString: (YearViewEntity item) => item.name,
+                    return DropdownFormMenu<YearViewEntity>(
+                      hintText: 'Ano',
+                      itemsLabel: (YearViewEntity value) => value.name,
                       onChanged: (YearViewEntity? value) {
                         if (value != null) {
                           presenter.setYear(value);
                           presenter.loadFipeInfoData();
                         }
                       },
-                      items: snapshot.data ?? [],
+                      items: snapshot.data,
                     );
                   },
                 ),

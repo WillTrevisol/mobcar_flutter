@@ -25,7 +25,21 @@ class AppTheme {
       elevation: 0,
     ),
     textTheme: TextTheme(
+      titleLarge: TextStyle(
+        color: blackMob,
+        fontSize: 18,
+        fontWeight: FontWeight.w700,
+      ),
       titleMedium: TextStyle(
+        color: blackMob,
+        fontSize: 16,
+      ),
+      bodyLarge: TextStyle(
+        color: greyMob,
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+      ),
+      bodyMedium: TextStyle(
         color: blueMob,
         fontSize: 16,
       ),

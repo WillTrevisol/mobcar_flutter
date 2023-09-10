@@ -12,7 +12,7 @@ class DefaultBottomBar extends StatelessWidget {
           padding: const EdgeInsets.only(top: 8),
           child: Text(
             '© 2020. All rights reserved to Mobcar.',
-            style: Theme.of(context).textTheme.titleMedium,
+            style: Theme.of(context).textTheme.bodyMedium,
             textAlign: TextAlign.center,
           ),
         ),
