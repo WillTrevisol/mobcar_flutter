@@ -97,19 +97,7 @@ class VehicleForm extends StatelessWidget {
                 StreamBuilder<FipeInfoViewEntity?>(
                   stream: presenter.fipeInfoStream,
                   builder: (context, snapshot) {
-                    return TextFormField(
-                      readOnly: true,
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        hintText: snapshot.data?.price ?? 'Valor',
-                        hintStyle: const TextStyle(
-                          color: Colors.black,
-                        )
-                      ),
-                    );
+                    return PriceField(price: snapshot.data?.price);
                   }
                 ),
                 const SizedBox(height: 12),
@@ -131,7 +119,7 @@ class VehicleForm extends StatelessWidget {
                     ),
                     const SizedBox(width: 12),
                     CustomElevatedButton(
-                      onPressed: () {},
+                      onPressed: presenter.save,
                       color: Colors.black,
                       widget: const Text('Salvar')
                     ),

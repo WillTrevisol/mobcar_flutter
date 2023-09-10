@@ -8,5 +8,6 @@ DashboardPresenter getxDashboardPresenterFactory() {
     loadModels: remoteLoadModelsFactory(),
     loadYears: remoteLoadYearsFactory(),
     loadFipeInfo: remoteLoadFipeInfoFactory(),
+    saveFipeInfo: localSaveFipeInfoFactory(),
   );
 }

@@ -11,12 +11,14 @@ class GetxDashboardPresenter extends  GetxController implements DashboardPresent
     required this.loadModels,
     required this.loadYears,
     required this.loadFipeInfo,
+    required this.saveFipeInfo,
   });
 
   final LoadBrands loadBrands;
   final LoadModels loadModels;
   final LoadYears loadYears;
   final LoadFipeInfo loadFipeInfo;
+  final SaveFipeInfo saveFipeInfo;
 
   BrandViewEntity? _brand;
   ModelViewEntity? _model;
@@ -102,12 +104,14 @@ class GetxDashboardPresenter extends  GetxController implements DashboardPresent
     try {
       _isLoadingController.value = true;
       final fipeInfo = await loadFipeInfo.load(brand: _brand!.code, model: _model!.code, year: _year!.code);
-      _fipeInfoController.subject.add(FipeInfoViewEntity(
+      final fipeViewEntity = FipeInfoViewEntity(
         price: fipeInfo.price,
         brand: fipeInfo.brand,
         model: fipeInfo.model,
         modelYear: fipeInfo.modelYear,
-      ));
+      );
+      _fipeInfoController.subject.add(fipeViewEntity);
+      setFipeInfo(fipeViewEntity);
     } catch(error) {
       log(error.toString());
     } finally {
@@ -116,8 +120,8 @@ class GetxDashboardPresenter extends  GetxController implements DashboardPresent
   }
 
   @override
-  Future<void> save() {
-    throw UnimplementedError();
+  Future<void> save() async {
+    await saveFipeInfo.save([_fipeInfo!.toDomainEntity()]);
   }
 
   @override
