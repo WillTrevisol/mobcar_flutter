@@ -21,6 +21,7 @@ dependencies:
   provider: ^6.0.5
   progress_loader_overlay: ^3.0.3
   dropdown_search: ^5.0.6
+  localstorage: ^4.0.1+4
 
 dev_dependencies:
   flutter_test:
