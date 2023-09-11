@@ -10,5 +10,11 @@ class CacheStorageAdapter implements CacheStorage {
   Future<void> save({required String key, required value}) async {
     await localStorage.setItem(key, value);
   }
+  
+  @override
+  Future load(String key) {
+    // TODO: implement load
+    throw UnimplementedError();
+  }
 
 }

@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:mobcar/domain/usecases/usecases.dart';
 import 'package:mobcar/ui/pages/pages.dart';
 
-class GetxDashboardPresenter extends  GetxController implements DashboardPresenter {
+class GetxDashboardPresenter extends GetxController implements DashboardPresenter {
   GetxDashboardPresenter({
     required this.loadBrands,
     required this.loadModels,
