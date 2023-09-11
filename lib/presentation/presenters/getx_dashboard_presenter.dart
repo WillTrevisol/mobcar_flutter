@@ -70,6 +70,9 @@ class GetxDashboardPresenter extends GetxController implements DashboardPresente
 
   @override
   Future<void> loadBrandsData() async {
+    _model = null;
+    _year = null;
+    _fipeInfo = null;
     try {
       _isLoadingController.value = true;
       final brands = await loadBrands.load();
@@ -83,6 +86,8 @@ class GetxDashboardPresenter extends GetxController implements DashboardPresente
 
   @override
   Future<void> loadModelsData() async {
+    _year = null;
+    _fipeInfo = null;
     try {
       _isLoadingController.value = true;
       final brands = await loadModels.load(_brand!.code);
@@ -96,6 +101,7 @@ class GetxDashboardPresenter extends GetxController implements DashboardPresente
 
   @override
   Future<void> loadYearsData() async {
+    _fipeInfo = null;
     try {
       _isLoadingController.value = true;
       final years = await loadYears.load(brand: _brand!.code, model: _model!.code);
@@ -146,11 +152,15 @@ class GetxDashboardPresenter extends GetxController implements DashboardPresente
     }
   }
 
+  bool get validData => _brand != null && _model != null && _year != null && _fipeInfo != null;
+
   @override
   Future<void> save() async {
-    _fipeInfos = _fipeInfos?.cast() ?? []..add(_fipeInfo!);
-    await saveFipeInfo.save(_fipeInfos!.map((fipe) => fipe.toDomainEntity()).toList());
-    _fipeInfosController.subject.add(_fipeInfos);
+    if (validData) {
+      _fipeInfos = _fipeInfos?.cast() ?? []..add(_fipeInfo!);
+      await saveFipeInfo.save(_fipeInfos!.map((fipe) => fipe.toDomainEntity()).toList());
+      _fipeInfosController.subject.add(_fipeInfos);
+    }
   }
 
   @override

@@ -94,10 +94,7 @@ class _DashboardPageState extends State<DashboardPage> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          child: ListenableProvider(
-            create: (_) => widget.presenter,
-            child: const VehicleForm(),
-          ),
+          child: const VehicleForm(),
         );
       },
     );

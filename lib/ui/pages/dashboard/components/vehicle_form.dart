@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:mobcar/ui/components/components.dart';
@@ -12,7 +12,7 @@ class VehicleForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final presenter = Provider.of<DashboardPresenter>(context);
+    final presenter = Get.find<DashboardPresenter>();
     return Builder(
       builder: (context) {
         SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -105,9 +105,7 @@ class VehicleForm extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     CustomElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
+                      onPressed: () => Navigator.pop(context),
                       color: Colors.white,
                       borderColor: Colors.black,
                       widget: const Text(
@@ -119,7 +117,7 @@ class VehicleForm extends StatelessWidget {
                     ),
                     const SizedBox(width: 12),
                     CustomElevatedButton(
-                      onPressed: presenter.save,
+                      onPressed: () => presenter.save().then((_) => Navigator.pop(context)),
                       color: Colors.black,
                       widget: const Text('Salvar')
                     ),

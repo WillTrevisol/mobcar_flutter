@@ -34,6 +34,9 @@ class AppTheme {
         color: blackMob,
         fontSize: 16,
       ),
+      titleSmall: const TextStyle(
+        fontWeight: FontWeight.bold,
+      ),
       bodyLarge: TextStyle(
         color: greyMob,
         fontSize: 16,
@@ -42,6 +45,10 @@ class AppTheme {
       bodyMedium: TextStyle(
         color: blueMob,
         fontSize: 16,
+      ),
+      bodySmall: TextStyle(
+        color: blackMob,
+        fontSize: 12,
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(

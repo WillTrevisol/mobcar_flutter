@@ -31,7 +31,7 @@ class VehicleTile extends StatelessWidget {
             ),
           ),
           TextButton(
-            onPressed: () {}, 
+            onPressed: () => showDetailsDialog(context), 
             child: const Text('Ver mais')
           ),
         ],
@@ -58,6 +58,14 @@ class VehicleTile extends StatelessWidget {
   Future<void> showDeleteDialog(BuildContext context) async {
     return await showDialog(
       context: context, builder: (context) => VehicleDeleteDialog(
+        fipeInfo: fipeInfoViewEntity,
+      ),
+    );
+  }
+
+  Future<void> showDetailsDialog(BuildContext context) async {
+    return await showDialog(
+      context: context, builder: (context) => VehicleDetailsDialog(
         fipeInfo: fipeInfoViewEntity,
       ),
     );
