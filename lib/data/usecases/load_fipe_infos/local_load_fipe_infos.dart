@@ -1,4 +1,5 @@
 import 'package:mobcar/data/cache/cache.dart';
+import 'package:mobcar/data/entities/entities.dart';
 import 'package:mobcar/domain/entities/fipe_info.dart';
 import 'package:mobcar/domain/helpers/helpers.dart';
 import 'package:mobcar/domain/usecases/usecases.dart';
@@ -11,8 +12,8 @@ class LocalLoadFipeInfos implements LoadFipeInfos {
   @override
   Future<List<FipeInfo>> load() async {
     try {
-      await cacheStorage.load('fipe_infos');
-      return [const FipeInfo(price: 'price', brand: 'brand', model: 'model', modelYear: 1)];
+      final result = await cacheStorage.load('fipe_infos');
+      return result.map<FipeInfo>((fipeInfo) => LocalFipeInfo.fromMap(fipeInfo).toDomainEntity()).toList();
     } catch(error) {
       throw DomainError.unexpected;
     }

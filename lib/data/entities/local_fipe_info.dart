@@ -22,12 +22,26 @@ class LocalFipeInfo extends Equatable {
     modelYear: fipeInfo.modelYear,
   );
 
+  FipeInfo toDomainEntity() => FipeInfo(
+    price: price,
+    brand: brand,
+    model: model,
+    modelYear: modelYear,
+  );
+
   Map<String, dynamic> toMap() => {
     'price': price,
     'brand': brand,
     'model': model,
     'modelYear': modelYear,
   };
+
+  factory LocalFipeInfo.fromMap(Map data) => LocalFipeInfo(
+    price: data['price'],
+    brand: data['brand'],
+    model: data['model'],
+    modelYear: data['modelYear'],
+  );
   
   @override
   List<Object?> get props => [ price, brand, model, modelYear ];
