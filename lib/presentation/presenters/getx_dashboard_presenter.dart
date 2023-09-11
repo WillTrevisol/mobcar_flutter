@@ -3,9 +3,10 @@ import 'dart:developer';
 import 'package:get/get.dart';
 
 import 'package:mobcar/domain/usecases/usecases.dart';
+import 'package:mobcar/presentation/mixins/mixins.dart';
 import 'package:mobcar/ui/pages/pages.dart';
 
-class GetxDashboardPresenter extends GetxController implements DashboardPresenter {
+class GetxDashboardPresenter extends GetxController with LoadingManager implements DashboardPresenter {
   GetxDashboardPresenter({
     required this.loadBrands,
     required this.loadModels,
@@ -28,7 +29,6 @@ class GetxDashboardPresenter extends GetxController implements DashboardPresente
   FipeInfoViewEntity? _fipeInfo;
   List<FipeInfoViewEntity>? _fipeInfos;
 
-  final _isLoadingController = Rx<bool>(false);
   final _brandController = Rx<List<BrandViewEntity>?>(null);
   final _modelController = Rx<List<ModelViewEntity>?>(null);
   final _yearController = Rx<List<YearViewEntity>?>(null);
@@ -56,7 +56,7 @@ class GetxDashboardPresenter extends GetxController implements DashboardPresente
   List<FipeInfoViewEntity>? get fipeInfos => _fipeInfos;
 
   @override
-  Stream<bool> get isLoadingStream => _isLoadingController.stream;
+  Stream<bool> get isLoadingStream => isLoading;
   @override
   Stream<List<BrandViewEntity>?> get brandStream => _brandController.stream;
   @override
@@ -74,13 +74,13 @@ class GetxDashboardPresenter extends GetxController implements DashboardPresente
     _year = null;
     _fipeInfo = null;
     try {
-      _isLoadingController.value = true;
+      setIsLoading = true;
       final brands = await loadBrands.load();
       _brandController.subject.add(brands.map((brand) => BrandViewEntity(name: brand.name, code: brand.code)).toList());
     } catch(error) {
       log(error.toString());
     } finally {
-      _isLoadingController.value = false;
+      setIsLoading = false;
     }
   }
 
@@ -89,13 +89,13 @@ class GetxDashboardPresenter extends GetxController implements DashboardPresente
     _year = null;
     _fipeInfo = null;
     try {
-      _isLoadingController.value = true;
+      setIsLoading = true;
       final brands = await loadModels.load(_brand!.code);
       _modelController.subject.add(brands.map((model) => ModelViewEntity(name: model.name, code: model.code)).toList());
     } catch(error) {
       log(error.toString());
     } finally {
-      _isLoadingController.value = false;
+      setIsLoading = false;
     }
   }
 
@@ -103,20 +103,20 @@ class GetxDashboardPresenter extends GetxController implements DashboardPresente
   Future<void> loadYearsData() async {
     _fipeInfo = null;
     try {
-      _isLoadingController.value = true;
+      setIsLoading = true;
       final years = await loadYears.load(brand: _brand!.code, model: _model!.code);
       _yearController.subject.add(years.map((year) => YearViewEntity(name: year.name, code: year.code)).toList());
     } catch(error) {
       log(error.toString());
     } finally {
-      _isLoadingController.value = false;
+      setIsLoading = false;
     }
   }
 
   @override
   Future<void> loadFipeInfoData() async {
     try {
-      _isLoadingController.value = true;
+      setIsLoading = true;
       final fipeInfo = await loadFipeInfo.load(brand: _brand!.code, model: _model!.code, year: _year!.code);
       final fipeViewEntity = FipeInfoViewEntity(
         price: fipeInfo.price,
@@ -129,14 +129,14 @@ class GetxDashboardPresenter extends GetxController implements DashboardPresente
     } catch(error) {
       log(error.toString());
     } finally {
-      _isLoadingController.value = false;
+      setIsLoading = false;
     }
   }
 
   @override
   Future<void> loadFipeInfosData() async {
     try {
-      _isLoadingController.value = true;
+      setIsLoading = true;
       final fipeInfos = await loadFipeInfos.load();
       _fipeInfos = fipeInfos.map((item) => FipeInfoViewEntity(
         price: item.price,
@@ -148,7 +148,7 @@ class GetxDashboardPresenter extends GetxController implements DashboardPresente
     } catch(error) {
       log(error.toString());
     } finally {
-      _isLoadingController.value = false;
+      setIsLoading = false;
     }
   }
 
@@ -172,7 +172,7 @@ class GetxDashboardPresenter extends GetxController implements DashboardPresente
 
   @override
   void dispose() {
-    _isLoadingController.close();
+    disposeIsLoading();
     _brandController.close();
     _modelController.close();
     _yearController.close();

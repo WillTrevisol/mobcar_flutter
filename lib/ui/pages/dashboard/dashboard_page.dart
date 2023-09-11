@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:mobcar/ui/pages/pages.dart';
+import 'package:mobcar/ui/mixins/mixins.dart';
 import 'package:mobcar/ui/components/components.dart';
-import 'package:provider/provider.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key, required this.presenter}) : super(key: key);
@@ -13,7 +13,7 @@ class DashboardPage extends StatefulWidget {
   State<DashboardPage> createState() => _DashboardPageState();
 }
 
-class _DashboardPageState extends State<DashboardPage> {
+class _DashboardPageState extends State<DashboardPage> with LoadingManager {
 
   @override
   void dispose() {
@@ -28,13 +28,7 @@ class _DashboardPageState extends State<DashboardPage> {
       bottomNavigationBar: const DefaultBottomBar(),
       body: Builder(
         builder: (context) {
-          widget.presenter.isLoadingStream.listen((isLoading) {
-            if (isLoading) {
-              showLoading(context);
-            } else {
-              hideLoading(context);
-            }
-          });
+          handleLoading(context, widget.presenter.isLoadingStream);
 
           SchedulerBinding.instance.addPostFrameCallback((_) async {
             await widget.presenter.loadFipeInfosData();
@@ -70,10 +64,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     child: ListView.builder(
                       itemCount: fipeInfos.length,
                       itemBuilder: (context, index) {
-                        return ListenableProvider(
-                          create: (_) => widget.presenter,
-                          child: VehicleTile(fipeInfoViewEntity: fipeInfos[index]),
-                        );
+                        return  VehicleTile(fipeInfoViewEntity: fipeInfos[index]);
                       },
                     ),
                   );
