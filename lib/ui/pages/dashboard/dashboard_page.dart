@@ -70,7 +70,10 @@ class _DashboardPageState extends State<DashboardPage> {
                     child: ListView.builder(
                       itemCount: fipeInfos.length,
                       itemBuilder: (context, index) {
-                        return VehicleTile(fipeInfoViewEntity: fipeInfos[index]);
+                        return ListenableProvider(
+                          create: (_) => widget.presenter,
+                          child: VehicleTile(fipeInfoViewEntity: fipeInfos[index]),
+                        );
                       },
                     ),
                   );

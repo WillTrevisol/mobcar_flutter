@@ -9,6 +9,7 @@ class VehicleTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final popupChoices = ['Deletar'];
     return ListTile(
       leading: Image.asset('assets/images/voyage-sedan.png'),
       title: Column(
@@ -34,6 +35,30 @@ class VehicleTile extends StatelessWidget {
             child: const Text('Ver mais')
           ),
         ],
+      ),
+      trailing: PopupMenuButton<String>(
+        onSelected: (choice) {
+          switch (choice) {
+            case 'Deletar':
+            showDeleteDialog(context);
+            break;
+          }
+        },
+        itemBuilder: ((context) => popupChoices.map((choice) {
+          return PopupMenuItem(
+            value: choice,
+            child: Text(choice),
+          );
+          }).toList() 
+        ),
+      ),
+    );
+  }
+
+  Future<void> showDeleteDialog(BuildContext context) async {
+    return await showDialog(
+      context: context, builder: (context) => VehicleDeleteDialog(
+        fipeInfo: fipeInfoViewEntity,
       ),
     );
   }

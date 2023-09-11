@@ -26,6 +26,7 @@ abstract class DashboardPresenter implements Listenable {
   Future<void> loadFipeInfoData();
   Future<void> loadFipeInfosData();
   Future<void> save();
+  Future<void> delete(FipeInfoViewEntity fipeInfo);
 
   void dispose();
 }

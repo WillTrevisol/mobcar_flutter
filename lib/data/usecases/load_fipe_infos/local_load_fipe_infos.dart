@@ -1,6 +1,6 @@
 import 'package:mobcar/data/cache/cache.dart';
 import 'package:mobcar/data/entities/entities.dart';
-import 'package:mobcar/domain/entities/fipe_info.dart';
+import 'package:mobcar/domain/entities/entities.dart';
 import 'package:mobcar/domain/helpers/helpers.dart';
 import 'package:mobcar/domain/usecases/usecases.dart';
 

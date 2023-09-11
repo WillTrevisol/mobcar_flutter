@@ -154,6 +154,13 @@ class GetxDashboardPresenter extends GetxController implements DashboardPresente
   }
 
   @override
+  Future<void> delete(FipeInfoViewEntity fipeInfo) async {
+    _fipeInfos?.remove(fipeInfo);
+    await saveFipeInfo.save(_fipeInfos!.map((fipe) => fipe.toDomainEntity()).toList());
+    _fipeInfosController.subject.add(_fipeInfos);
+  }
+
+  @override
   void dispose() {
     _isLoadingController.close();
     _brandController.close();
