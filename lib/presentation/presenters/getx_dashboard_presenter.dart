@@ -12,6 +12,7 @@ class GetxDashboardPresenter extends GetxController implements DashboardPresente
     required this.loadYears,
     required this.loadFipeInfo,
     required this.saveFipeInfo,
+    required this.loadFipeInfos,
   });
 
   final LoadBrands loadBrands;
@@ -19,17 +20,20 @@ class GetxDashboardPresenter extends GetxController implements DashboardPresente
   final LoadYears loadYears;
   final LoadFipeInfo loadFipeInfo;
   final SaveFipeInfo saveFipeInfo;
+  final LoadFipeInfos loadFipeInfos;
 
   BrandViewEntity? _brand;
   ModelViewEntity? _model;
   YearViewEntity? _year;
   FipeInfoViewEntity? _fipeInfo;
+  List<FipeInfoViewEntity>? _fipeInfos;
 
   final _isLoadingController = Rx<bool>(false);
   final _brandController = Rx<List<BrandViewEntity>?>(null);
   final _modelController = Rx<List<ModelViewEntity>?>(null);
   final _yearController = Rx<List<YearViewEntity>?>(null);
   final _fipeInfoController = Rx<FipeInfoViewEntity?>(null);
+  final _fipeInfosController = Rx<List<FipeInfoViewEntity>?>(null);
 
   @override
   void setBrand(BrandViewEntity? value) => _brand = value;
@@ -48,6 +52,8 @@ class GetxDashboardPresenter extends GetxController implements DashboardPresente
   YearViewEntity? get year => _year;
   @override
   FipeInfoViewEntity? get fipeInfo => _fipeInfo;
+  @override
+  List<FipeInfoViewEntity>? get fipeInfos => _fipeInfos;
 
   @override
   Stream<bool> get isLoadingStream => _isLoadingController.stream;
@@ -59,6 +65,8 @@ class GetxDashboardPresenter extends GetxController implements DashboardPresente
   Stream<List<YearViewEntity>?> get yearStream => _yearController.stream;
   @override
   Stream<FipeInfoViewEntity?> get fipeInfoStream => _fipeInfoController.stream;
+  @override
+  Stream<List<FipeInfoViewEntity>?> get fipeInfosStream => _fipeInfosController.stream;
 
   @override
   Future<void> loadBrandsData() async {
@@ -120,8 +128,29 @@ class GetxDashboardPresenter extends GetxController implements DashboardPresente
   }
 
   @override
+  Future<void> loadFipeInfosData() async {
+    try {
+      _isLoadingController.value = true;
+      final fipeInfos = await loadFipeInfos.load();
+      _fipeInfos = fipeInfos.map((item) => FipeInfoViewEntity(
+        price: item.price,
+        brand: item.brand,
+        model: item.model,
+        modelYear: item.modelYear,
+      )).toList();
+      _fipeInfosController.subject.add(_fipeInfos);
+    } catch(error) {
+      log(error.toString());
+    } finally {
+      _isLoadingController.value = false;
+    }
+  }
+
+  @override
   Future<void> save() async {
-    await saveFipeInfo.save([_fipeInfo!.toDomainEntity()]);
+    _fipeInfos = _fipeInfos?.cast() ?? []..add(_fipeInfo!);
+    await saveFipeInfo.save(_fipeInfos!.map((fipe) => fipe.toDomainEntity()).toList());
+    _fipeInfosController.subject.add(_fipeInfos);
   }
 
   @override
@@ -131,6 +160,8 @@ class GetxDashboardPresenter extends GetxController implements DashboardPresente
     _modelController.close();
     _yearController.close();
     _fipeInfoController.close();
+    _fipeInfosController.close();
     super.dispose();
   }
+  
 }

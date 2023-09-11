@@ -1,29 +1,29 @@
 import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:localstorage/localstorage.dart';
+import 'package:get_storage/get_storage.dart';
 
 import 'package:mobcar/infra/cache/cache.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../mocks/mocks.dart';
 
-class LocalStorageMock extends Mock implements LocalStorage {
-  LocalStorageMock() {
-    mockSetItem();
+class GetStorageMock extends Mock implements GetStorage {
+  GetStorageMock() {
+    mockWrite();
   }
 
-  When mockSetItemCall() => when(() => setItem(any(), any()));
-  void mockSetItem() => mockSetItemCall().thenAnswer((_) async => _);
-  void mockSetItemError() => mockSetItemCall().thenThrow(Exception());
+  When mockWriteCall() => when(() => write(any(), any()));
+  void mockWrite() => mockWriteCall().thenAnswer((_) async => _);
+  void mockWriteError() => mockWriteCall().thenThrow(Exception());
 
-  When mockGetItemCall() => when(() => getItem(any()));
-  void mockGetItem(List<Map> data) => mockGetItemCall().thenAnswer((_) async => data);
-  void mockGetItemError() => mockGetItemCall().thenThrow(Exception());
+  When mockReadCall() => when(() => read(any()));
+  void mockRead(List<Map> data) => mockReadCall().thenAnswer((_) async => data);
+  void mockReadError() => mockReadCall().thenThrow(Exception());
 }
 
 void main() {
 
-  late LocalStorageMock localStorage;
+  late GetStorageMock getStorage;
   late CacheStorageAdapter systemUnderTest;
   late String key;
   late List<Map> fipeInfosMap;
@@ -31,20 +31,20 @@ void main() {
   setUp(() {
     key = faker.guid.guid();
     fipeInfosMap = CacheFactory.listFipeInfos();
-    localStorage = LocalStorageMock();
-    systemUnderTest = CacheStorageAdapter(localStorage: localStorage);
-    localStorage.mockGetItem(fipeInfosMap);
+    getStorage = GetStorageMock();
+    systemUnderTest = CacheStorageAdapter(getStorage: getStorage);
+    getStorage.mockRead(fipeInfosMap);
   });
 
   group('save', () {
     test('Shoud call LocalStorage with correct values', () async {
       await systemUnderTest.save(key: key, value: fipeInfosMap);
       
-      verify(() => localStorage.setItem(key, fipeInfosMap)).called(1);
+      verify(() => getStorage.write(key, fipeInfosMap)).called(1);
     });
 
     test('Should throw if setItem throws', () async {
-      localStorage.mockSetItemError();
+      getStorage.mockWriteError();
       final future = systemUnderTest.save(key: key, value: fipeInfosMap);
 
       expect(future, throwsA(const TypeMatcher<Exception>()));
@@ -52,10 +52,10 @@ void main() {
   });
 
   group('load', () {
-    test('Shoud call LocalStorage with correct key', () async {
+    test('Shoud call getStorage with correct key', () async {
       await systemUnderTest.load(key);
       
-      verify(() => localStorage.getItem(key)).called(1);
+      verify(() => getStorage.read(key)).called(1);
     });
 
     test('Should return list of map on success', () async {
@@ -70,7 +70,7 @@ void main() {
     });
 
     test('Should throw if getItem throws', () async {
-      localStorage.mockGetItemError();
+      getStorage.mockReadError();
       final future = systemUnderTest.load(key);
 
       expect(future, throwsA(const TypeMatcher<Exception>()));

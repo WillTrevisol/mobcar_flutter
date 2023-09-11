@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 import 'package:mobcar/ui/pages/pages.dart';
 import 'package:mobcar/ui/components/components.dart';
@@ -15,6 +16,12 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
 
   @override
+  void dispose() {
+    widget.presenter.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {  
     return Scaffold(
       appBar: DefaultAppBar.appBar(context),
@@ -27,6 +34,10 @@ class _DashboardPageState extends State<DashboardPage> {
             } else {
               hideLoading(context);
             }
+          });
+
+          SchedulerBinding.instance.addPostFrameCallback((_) async {
+            await widget.presenter.loadFipeInfosData();
           });
 
           return Column(
@@ -50,9 +61,24 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
               ),
               const Divider(color: Colors.black, indent: 2, endIndent: 2),
+              const SizedBox(height: 10),
+              StreamBuilder<List<FipeInfoViewEntity>?>(
+                stream: widget.presenter.fipeInfosStream,
+                builder: (context, snapshot) {
+                  final fipeInfos = snapshot.data ?? [];
+                  return Expanded(
+                    child: ListView.builder(
+                      itemCount: fipeInfos.length,
+                      itemBuilder: (context, index) {
+                        return VehicleTile(fipeInfoViewEntity: fipeInfos[index]);
+                      },
+                    ),
+                  );
+                },
+              ),
             ]
           );
-        }
+        },
       ),
     );
   }
