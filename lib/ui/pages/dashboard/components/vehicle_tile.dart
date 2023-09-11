@@ -9,7 +9,7 @@ class VehicleTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final popupChoices = ['Deletar'];
+    final popupChoices = ['Ver mais', 'Deletar'];
     return ListTile(
       leading: Image.asset('assets/images/voyage-sedan.png'),
       title: Column(
@@ -40,8 +40,11 @@ class VehicleTile extends StatelessWidget {
         onSelected: (choice) {
           switch (choice) {
             case 'Deletar':
-            showDeleteDialog(context);
-            break;
+              showDeleteDialog(context);
+              break;
+            case 'Ver mais':
+              showDetailsDialog(context);
+              break;
           }
         },
         itemBuilder: ((context) => popupChoices.map((choice) {
