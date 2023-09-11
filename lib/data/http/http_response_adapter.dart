@@ -5,7 +5,7 @@ import 'package:mobcar/data/http/http.dart';
 class HttpResponseAdapter {
 
   static final Map<int, dynamic> _adapter = {
-    200: (data) => data.isNotEmpty ? jsonDecode(data) : null,
+    200: (data) => json.decode(utf8.decode(data)),
     404: (_) => throw HttpError.notFound,
     500: (_) => throw HttpError.serverError,
   };

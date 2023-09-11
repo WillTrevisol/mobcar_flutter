@@ -11,11 +11,11 @@ class HttpAdapter implements HttpClient {
   Future get({required String url, Map<String, dynamic>? headers}) async {
     Response response = Response('', 500);
     try {
-      response = await client.get(Uri.parse(url), headers: {'content-type': 'application/json'});
+      response = await client.get(Uri.parse(url), headers: {'content-type': 'application/json', 'accept': 'application/json'});
     } catch (error) {
       throw HttpError.serverError;
     }
-    return HttpResponseAdapter.get(key: response.statusCode, data: response.body);
+    return HttpResponseAdapter.get(key: response.statusCode, data: response.bodyBytes);
   }
 
 }

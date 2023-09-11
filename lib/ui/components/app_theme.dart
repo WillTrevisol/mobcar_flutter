@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:google_fonts/google_fonts.dart';
+
 class AppTheme {
   static Color yellowMob = const Color.fromRGBO(250, 173, 20, 1.0);
   static Color blackMob = const Color.fromRGBO(0, 0, 0, 1.0);
@@ -25,28 +27,28 @@ class AppTheme {
       elevation: 0,
     ),
     textTheme: TextTheme(
-      titleLarge: TextStyle(
+      titleLarge: GoogleFonts.nunito(
         color: blackMob,
         fontSize: 18,
         fontWeight: FontWeight.w700,
       ),
-      titleMedium: TextStyle(
+      titleMedium: GoogleFonts.nunito(
         color: blackMob,
         fontSize: 16,
       ),
-      titleSmall: const TextStyle(
+      titleSmall: GoogleFonts.nunito(
         fontWeight: FontWeight.bold,
       ),
-      bodyLarge: TextStyle(
+      bodyLarge: GoogleFonts.nunito(
         color: greyMob,
         fontSize: 16,
         fontWeight: FontWeight.w600,
       ),
-      bodyMedium: TextStyle(
+      bodyMedium: GoogleFonts.nunito(
         color: blueMob,
         fontSize: 16,
       ),
-      bodySmall: TextStyle(
+      bodySmall: GoogleFonts.nunito(
         color: blackMob,
         fontSize: 12,
       ),
