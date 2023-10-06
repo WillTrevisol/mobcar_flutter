@@ -66,6 +66,7 @@ void main() {
         'brand': fipeInfosMap[0]['brand'],
         'model': fipeInfosMap[0]['model'],
         'modelYear': fipeInfosMap[0]['modelYear'],
+        'codeFipe': fipeInfosMap[0]['codeFipe'],
       }]);
     });
 

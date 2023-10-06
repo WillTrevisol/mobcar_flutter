@@ -31,7 +31,7 @@ void main() {
   test('Should call HttpClient with correct values', () async {
     await systemUnderTest.load(brand: brand, model: model);
 
-    verify(() => httpClientMock.get(url: '$url/brands/$brand/models/$model/years')).called(1);
+    verify(() => httpClientMock.get(url: '$url/$brand/models/$model/years')).called(1);
   });
 
   test('Should return list of Years on success', () async {

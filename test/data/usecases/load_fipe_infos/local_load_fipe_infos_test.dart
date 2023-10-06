@@ -36,6 +36,7 @@ void main() {
         brand: fipeInfosMock[0]['brand'],
         model: fipeInfosMock[0]['model'],
         modelYear: fipeInfosMock[0]['modelYear'],
+        codeFipe: fipeInfosMock[0]['codeFipe'],
       )
     ]);
   });

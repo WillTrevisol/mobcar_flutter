@@ -123,6 +123,7 @@ class GetxDashboardPresenter extends GetxController with LoadingManager implemen
         brand: fipeInfo.brand,
         model: fipeInfo.model,
         modelYear: fipeInfo.modelYear,
+        codeFipe: fipeInfo.codeFipe,
       );
       _fipeInfoController.subject.add(fipeViewEntity);
       setFipeInfo(fipeViewEntity);
@@ -143,6 +144,7 @@ class GetxDashboardPresenter extends GetxController with LoadingManager implemen
         brand: item.brand,
         model: item.model,
         modelYear: item.modelYear,
+        codeFipe: item.codeFipe,
       )).toList();
       _fipeInfosController.subject.add(_fipeInfos);
     } catch(error) {

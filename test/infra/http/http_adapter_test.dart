@@ -27,9 +27,9 @@ void main() {
   });
 
   test('Should call get with correct values', () async {
-    await systemUnderTest.get(url: url, headers: {'content-type': 'application/json'});
+    await systemUnderTest.get(url: url, headers: {'content-type': 'application/json', 'accept': 'application/json'});
 
-    verify(() => clientMock.get(uri, headers: {'content-type': 'application/json'})).called(1);
+    verify(() => clientMock.get(uri, headers: {'content-type': 'application/json', 'accept': 'application/json'})).called(1);
   });
 
   test('Should return data if get returns 200', () async {
