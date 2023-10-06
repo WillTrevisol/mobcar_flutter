@@ -69,7 +69,13 @@ class VehicleDetailsDialog extends StatelessWidget {
                     Text(fipeInfo.brand, style: Theme.of(context).textTheme.bodySmall),
                     const SizedBox(height: 20),
                     Text('Modelo', style: Theme.of(context).textTheme.titleSmall),
-                    Text(fipeInfo.model, style: Theme.of(context).textTheme.bodySmall),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.45,
+                      child: Text(
+                        fipeInfo.model,
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    ),
                   ],
                 ),
                 Column(
