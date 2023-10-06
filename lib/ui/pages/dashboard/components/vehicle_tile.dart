@@ -11,7 +11,12 @@ class VehicleTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final popupChoices = ['Ver mais', 'Deletar'];
     return ListTile(
-      leading: Image.asset('assets/images/voyage-sedan.png'),
+      leading: Image.asset(
+        'assets/images/${fipeInfoViewEntity.brand}.png',
+        width: MediaQuery.of(context).size.width * 0.2,
+        scale: 1,
+        errorBuilder: (context, error, stackTrace) => Image.asset('assets/images/VW - VolksWagen.png'),
+      ),
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

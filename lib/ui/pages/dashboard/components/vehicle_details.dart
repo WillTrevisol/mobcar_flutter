@@ -48,7 +48,10 @@ class VehicleDetailsDialog extends StatelessWidget {
             ),
             Stack(
               children: [
-                Image.asset('assets/images/voyage-sedan.png', scale: 2),
+                Image.asset(
+                  'assets/images/${fipeInfo.brand}.png',
+                  errorBuilder: (context, error, stackTrace) => Image.asset('assets/images/VW - VolksWagen.png'),
+                ),
                 Row(
                   children: stars,
                 ),
