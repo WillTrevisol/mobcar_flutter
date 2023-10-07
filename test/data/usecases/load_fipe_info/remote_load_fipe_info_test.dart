@@ -34,7 +34,7 @@ void main() {
   test('Should call HttpClient with correct values', () async {
     await systemUnderTest.load(brand: brand, model: model, year: year);
 
-    verify(() => httpClientMock.get(url: '$url/brands/$brand/models/$model/years/$year')).called(1);
+    verify(() => httpClientMock.get(url: '$url/$brand/models/$model/years/$year')).called(1);
   });
 
   test('Should return FipeInfo on success', () async {
@@ -46,6 +46,7 @@ void main() {
         brand: fipeInfo['brand'],
         model: fipeInfo['model'],
         modelYear: fipeInfo['modelYear'],
+        codeFipe: fipeInfo['codeFipe'],
       ),
     );
   });

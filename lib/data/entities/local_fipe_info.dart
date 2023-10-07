@@ -8,11 +8,13 @@ class LocalFipeInfo extends Equatable {
     required this.brand,
     required this.model,
     required this.modelYear,
+    required this.codeFipe,
   });
 
   final String price;
   final String brand;
   final String model;
+  final String codeFipe;
   final int modelYear;
 
   factory LocalFipeInfo.fromDomainEntity(FipeInfo fipeInfo) => LocalFipeInfo(
@@ -20,6 +22,7 @@ class LocalFipeInfo extends Equatable {
     brand: fipeInfo.brand,
     model: fipeInfo.model,
     modelYear: fipeInfo.modelYear,
+    codeFipe: fipeInfo.codeFipe
   );
 
   FipeInfo toDomainEntity() => FipeInfo(
@@ -27,6 +30,7 @@ class LocalFipeInfo extends Equatable {
     brand: brand,
     model: model,
     modelYear: modelYear,
+    codeFipe: codeFipe,
   );
 
   Map<String, dynamic> toMap() => {
@@ -34,6 +38,7 @@ class LocalFipeInfo extends Equatable {
     'brand': brand,
     'model': model,
     'modelYear': modelYear,
+    'codeFipe': codeFipe,
   };
 
   factory LocalFipeInfo.fromMap(Map data) => LocalFipeInfo(
@@ -41,8 +46,9 @@ class LocalFipeInfo extends Equatable {
     brand: data['brand'],
     model: data['model'],
     modelYear: data['modelYear'],
+    codeFipe: data['codeFipe']
   );
   
   @override
-  List<Object?> get props => [ price, brand, model, modelYear ];
+  List<Object?> get props => [ price, brand, model, modelYear, codeFipe ];
 }

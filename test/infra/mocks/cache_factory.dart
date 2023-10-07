@@ -7,6 +7,7 @@ class CacheFactory {
       'brand': faker.vehicle.make(),
       'model': faker.vehicle.model(),
       'modelYear': faker.randomGenerator.integer(2023, min: 1950),
+      'codeFipe': faker.guid.guid(),
     }
   ];
 }
