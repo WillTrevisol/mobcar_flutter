@@ -15,7 +15,6 @@ dependencies:
   equatable: ^2.0.5
   get: ^4.6.6
   provider: ^6.0.5
-  progress_loader_overlay: ^3.0.3
   dropdown_search: ^5.0.6
   get_storage: ^2.1.1
   google_fonts: ^5.1.0
