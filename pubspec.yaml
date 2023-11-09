@@ -10,32 +10,23 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^1.1.0
-  flutter_mobx: ^2.0.6+5
-  mobx: ^2.2.0
   font_awesome_flutter: ^10.5.0
-  shared_preferences: ^2.2.1
-  get_it: ^7.6.4
   cupertino_icons: ^1.0.6
   equatable: ^2.0.5
   get: ^4.6.6
   provider: ^6.0.5
-  progress_loader_overlay: ^3.0.3
   dropdown_search: ^5.0.6
-  localstorage: ^4.0.1+4
   get_storage: ^2.1.1
   google_fonts: ^5.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  mobx_codegen: ^2.3.0
-  build_runner: ^2.4.6
   flutter_lints: ^2.0.3
   mocktail: ^1.0.0
   faker: ^2.1.0
 
 flutter:
-
   uses-material-design: true
 
   assets:
