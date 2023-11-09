@@ -25,7 +25,7 @@ Vá para a raiz do projeto e execute os comandos abaixo:
 
 ```
 flutter pub get
-flutter run
+flutter run -t lib/main/main.dart
 ```
 
 ## :package: Pacotes e Ferramentas
