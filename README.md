@@ -1,6 +1,6 @@
 # MOBCAR
 
-Aplicativo para cadastro de veículos, contendo marca, modelo, ano e valor fipe.
+Aplicativo para cadastro de veículos, contendo marca, modelo, ano e valor fipe. <br>
 API utilizada https://github.com/deividfortuna/fipe
 
 ## Preview
@@ -54,4 +54,27 @@ lib/
 |- main/ -> - Contém o ponto inicial da aplicação `main.dart`, também possui todos os factories do projeto.
 |- presentation/ -> - Contém as streams para o gerenciamento de estado da aplicação.
 |- ui/ -> — Contém toda a UI para o projeto.
+```
+
+### :test_tube: Testes
+
+Este projeto conta com alguns testes, para executálos utilize o comando:
+
+```
+flutter run test
+```
+
+Estrutura de pastas dos testes abaixo:
+
+```
+test/
+|- data/
+  |- mocks/
+  |- usecases/
+|- domain/
+  |- mocks/
+|- infra/
+  |- cache/
+  |- http/
+  |- mocks/
 ```
