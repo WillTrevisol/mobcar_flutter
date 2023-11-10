@@ -64,7 +64,7 @@ Este projeto conta com alguns testes, para executálos utilize o comando:
 flutter run test
 ```
 
-Estrutura de pastas dos testes abaixo:
+Estrutura de pastas dos testes:
 
 ```
 test/
