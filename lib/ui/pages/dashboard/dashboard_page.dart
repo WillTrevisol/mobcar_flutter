@@ -6,7 +6,7 @@ import 'package:mobcar/ui/mixins/mixins.dart';
 import 'package:mobcar/ui/components/components.dart';
 
 class DashboardPage extends StatefulWidget {
-  const DashboardPage({Key? key, required this.presenter}) : super(key: key);
+  const DashboardPage({super.key, required this.presenter});
 
   final DashboardPresenter presenter;
   @override

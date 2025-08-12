@@ -4,12 +4,12 @@ import 'package:dropdown_search/dropdown_search.dart';
 
 class DropdownFormMenu<T> extends StatelessWidget {
   const DropdownFormMenu({
-    Key? key,
+    super.key,
     required this.itemsLabel,
     required this.onChanged,
     required this.items,
     required this.hintText
-  }) : super(key: key);
+  });
 
   final String Function(T) itemsLabel;
   final void Function(T?) onChanged;
@@ -22,8 +22,9 @@ class DropdownFormMenu<T> extends StatelessWidget {
       filterFn: (item, filter) {
         return item.toString().toLowerCase().contains(filter.toLowerCase());
       },
-      dropdownDecoratorProps: DropDownDecoratorProps(
-        dropdownSearchDecoration: InputDecoration(
+      compareFn: (objA, objB) => objA == objB,
+      decoratorProps: DropDownDecoratorProps(
+        decoration: InputDecoration(
           label: Text(hintText),
           hintText: hintText
         ),
@@ -41,7 +42,7 @@ class DropdownFormMenu<T> extends StatelessWidget {
       ),
       itemAsString: itemsLabel,
       onChanged: onChanged,
-      items: items ?? [],
+      items: (_, loadProps) => items ?? [],
     );
   }
 }

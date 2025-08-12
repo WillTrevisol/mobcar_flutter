@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mobcar/ui/pages/pages.dart';
 
 class VehicleTile extends StatelessWidget {
-  const VehicleTile({Key? key, required this.fipeInfoViewEntity}) : super(key: key);
+  const VehicleTile({super.key, required this.fipeInfoViewEntity});
 
   final FipeInfoViewEntity fipeInfoViewEntity;
 

@@ -13,7 +13,7 @@ class GetStorageMock extends Mock implements GetStorage {
   }
 
   When mockWriteCall() => when(() => write(any(), any()));
-  void mockWrite() => mockWriteCall().thenAnswer((_) async => _);
+  void mockWrite() => mockWriteCall().thenAnswer((answer) async => answer);
   void mockWriteError() => mockWriteCall().thenThrow(Exception());
 
   When mockReadCall() => when(() => read(any()));

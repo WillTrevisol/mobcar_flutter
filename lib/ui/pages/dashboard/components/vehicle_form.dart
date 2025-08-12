@@ -8,7 +8,7 @@ import 'package:mobcar/ui/components/components.dart';
 import 'package:mobcar/ui/pages/pages.dart';
 
 class VehicleForm extends StatelessWidget {
-  const VehicleForm({Key? key}) : super(key: key);
+  const VehicleForm({super.key});
 
   @override
   Widget build(BuildContext context) {
