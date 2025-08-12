@@ -25,8 +25,10 @@ Vá para a raiz do projeto e execute os comandos abaixo:
 
 ```
 flutter pub get
-flutter run -t lib/main/main.dart
+flutter run -t lib/main/main.dart --dart-define-from-file=lib/main/env.json
 ```
+
+Caso queira executar junto com sey clarity_flutter pessoal, adicione um arquivo `lib/main/env.json` com a seu id de projeto.
 
 ## :package: Pacotes e Ferramentas
 
@@ -41,6 +43,7 @@ flutter run -t lib/main/main.dart
 * [flutter_lints](https://github.com/flutter/packages/tree/main/packages/flutter_lints)
 * [mocktail](https://github.com/felangel/mocktail)
 * [faker](https://github.com/drager/faker)
+* [clarity_flutter](https://pub.dev/packages/clarity_flutter)
 
 ### :card_index_dividers: Estrutura de pastas
 
@@ -58,7 +61,7 @@ lib/
 
 ### :test_tube: Testes
 
-Este projeto conta com alguns testes, para executálos utilize o comando:
+Este projeto conta com alguns testes, para executá-los utilize o comando:
 
 ```
 flutter run test

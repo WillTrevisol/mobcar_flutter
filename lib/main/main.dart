@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:clarity_flutter/clarity_flutter.dart';
 
 import 'package:mobcar/main/factories/factories.dart';
 import 'package:mobcar/ui/components/components.dart';
@@ -9,7 +10,14 @@ import 'package:mobcar/ui/components/components.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
-  runApp(const MobCar());
+  const String clarityProjectId = String.fromEnvironment('CLARITY_PROJECT_ID');
+  runApp(ClarityWidget(
+    app: const MobCar(),
+    clarityConfig: ClarityConfig(
+      projectId: clarityProjectId,
+      logLevel: LogLevel.None,
+    ),
+  ));
 }
 
 class MobCar extends StatelessWidget {
