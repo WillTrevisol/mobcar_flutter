@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class PriceField extends StatelessWidget {
-  const PriceField({Key? key, required this.price}) : super(key: key);
+  const PriceField({super.key, required this.price});
 
   final String? price;
 

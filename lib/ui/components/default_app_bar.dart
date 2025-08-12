@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DefaultAppBar {
-  static appBar(BuildContext context) => AppBar(
+  static AppBar appBar(BuildContext context) => AppBar(
     leading: Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,

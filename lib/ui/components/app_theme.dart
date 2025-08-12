@@ -11,6 +11,7 @@ class AppTheme {
   static Color blueMob = const Color.fromRGBO(0, 173, 238, 1.0);
 
   static ThemeData themeData = ThemeData(
+    useMaterial3: false,
     appBarTheme: AppBarTheme(
       backgroundColor: blackMob,
       iconTheme: IconThemeData(

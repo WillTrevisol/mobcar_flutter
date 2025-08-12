@@ -13,7 +13,7 @@ void main() async {
 }
 
 class MobCar extends StatelessWidget {
-  const MobCar({Key? key}) : super(key: key);
+  const MobCar({super.key});
 
   @override
   Widget build(BuildContext context) {

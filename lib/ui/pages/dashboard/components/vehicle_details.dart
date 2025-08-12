@@ -7,7 +7,7 @@ import 'package:mobcar/ui/pages/pages.dart';
 
 
 class VehicleDetailsDialog extends StatelessWidget {
-  const VehicleDetailsDialog({Key? key, required this.fipeInfo}) : super(key: key);
+  const VehicleDetailsDialog({super.key, required this.fipeInfo});
 
   final FipeInfoViewEntity fipeInfo;  
 
@@ -59,7 +59,7 @@ class VehicleDetailsDialog extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

@@ -7,7 +7,7 @@ import 'package:mobcar/ui/components/components.dart';
 import 'package:mobcar/ui/pages/dashboard/dashboard.dart';
 
 class VehicleDeleteDialog extends StatelessWidget {
-  const VehicleDeleteDialog({Key? key, required this.fipeInfo}) : super(key: key);
+  const VehicleDeleteDialog({super.key, required this.fipeInfo});
 
   final FipeInfoViewEntity fipeInfo;
 
